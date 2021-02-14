@@ -5,13 +5,9 @@ import com.github.npospolita.worktimesheets.dao.EmployeeRepository
 import com.github.npospolita.worktimesheets.domain.Employee
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.getBean
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.ApplicationContext
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.test.annotation.DirtiesContext
 import javax.transaction.Transactional
 
 @SpringBootTest

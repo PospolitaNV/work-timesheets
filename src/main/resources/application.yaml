@@ -2,3 +2,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+
+bot:
+  domain:
+    adminId: ${ADMIN_ID}

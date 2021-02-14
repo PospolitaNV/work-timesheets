@@ -38,6 +38,7 @@ dependencies {
     testImplementation("org.testcontainers:postgresql")
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
     implementation("org.botlaxy:telegramit-starter:0.1.21")
+    implementation(kotlin("script-runtime"))
 }
 
 dependencyManagement {
