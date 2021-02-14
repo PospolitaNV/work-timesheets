@@ -36,7 +36,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:junit-jupiter")
     testImplementation("org.testcontainers:postgresql")
-    implementation("org.botlaxy:telegramit-starter:0.1.20")
+    implementation("org.botlaxy:telegramit-starter:0.1.21")
 }
 
 dependencyManagement {
