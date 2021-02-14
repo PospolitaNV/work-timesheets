@@ -78,4 +78,14 @@ class WorkReportService(
         }
     }
 
+
+    fun makeReport(employeeFullName: String): String {
+        val firstAndLastName = employeeFullName.split(" ")
+        if (firstAndLastName.size != 2) throw ValidationError("Введите правильные Фамилию и Имя пользователя")
+        val employee =
+            employeeRepository.findByFirstNameAndLastName(firstAndLastName[0], firstAndLastName[1])
+                .orElseThrow { ValidationError("Введите правильные Фамилию и Имя пользователя") }
+        return makeReport(employee.id)
+    }
+
 }

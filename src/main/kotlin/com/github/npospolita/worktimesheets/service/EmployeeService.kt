@@ -26,4 +26,6 @@ class EmployeeService(
         employeeRepository.deleteById(employeeId)
     }
 
+    public fun getEmployees() = employeeRepository.findAll()
+
 }

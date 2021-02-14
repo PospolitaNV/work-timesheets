@@ -8,14 +8,13 @@ import org.botlaxy.telegramit.spring.handler.dsl.springHandler
 
 val successfulCheckInMessage = "Вы успешно отметились!"
 
-springHandler("/checkIn") {
-
+springHandler("/checkout") {
     process { ctx, args ->
         val userId = ctx.message.user?.id ?: return@process TextMessage("Непредвиденная ошибка")
         allowOnlyKnownUser(this, userId)
 
         try {
-            getBean<CheckInService>().checkIn(CheckInType.IN, userId)
+            getBean<CheckInService>().checkIn(CheckInType.OUT, userId)
         } catch (ex: ValidationError) {
             return@process TextMessage(ex.message!!)
         }

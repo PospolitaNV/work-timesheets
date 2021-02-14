@@ -1,9 +1,13 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
 
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
+    username: ${JDBC_DATABASE_USERNAME:n.pospolita}
+    password: ${JDBC_DATABASE_PASSWORD:""}
 
 bot:
   domain:
-    adminId: ${ADMIN_ID}
+    adminId: ${ADMIN_ID:23452397}

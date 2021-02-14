@@ -3,8 +3,10 @@ package com.github.npospolita.worktimesheets.service
 import com.github.npospolita.worktimesheets.DatabaseTestBase
 import com.github.npospolita.worktimesheets.dao.EmployeeRepository
 import com.github.npospolita.worktimesheets.domain.Employee
+import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
@@ -46,6 +48,13 @@ class EmployeeServiceTest(
         val employee = employeeRepository.findByIdOrNull(1L)
         assertNotNull(employee)
         assertEquals(employee!!.wage, 200)
+    }
+
+    @Test
+    fun employeeWageChangeForNonExistingEmployee() {
+        assertThrows<ValidationError> {
+            employeeService.changeWage(1L, 200)
+        }
     }
 
 }
