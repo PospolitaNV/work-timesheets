@@ -6,6 +6,6 @@ import java.util.*
 
 interface WorkReportRepository : CrudRepository<WorkReport, UUID> {
 
-    fun findAllByEmployeeId(employeeId: Long) : List<WorkReport>
+    fun findAllByEmployeeId(employeeId: Long): List<WorkReport>
 
 }

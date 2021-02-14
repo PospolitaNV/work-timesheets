@@ -13,19 +13,16 @@ import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
 import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.*
-import javax.annotation.PostConstruct
 import javax.transaction.Transactional
 import kotlin.collections.ArrayList
 
 @Service
 class WorkReportService(
-    val workReportRepository: WorkReportRepository,
-    val workTimesheetRepository: WorkTimesheetRepository,
-    val employeeRepository: EmployeeRepository
+    private val workReportRepository: WorkReportRepository,
+    private val workTimesheetRepository: WorkTimesheetRepository,
+    private val employeeRepository: EmployeeRepository
 ) {
     companion object {
         val log = LoggerFactory.getLogger(WorkReportService::class.java.name)
@@ -60,11 +57,11 @@ class WorkReportService(
         }
 
         val salary = BigDecimal(employee.wage.toLong()) // зп за час
-            .divide(BigDecimal(60),20, RoundingMode.HALF_UP) // зп в минуту
+            .divide(BigDecimal(60), 20, RoundingMode.HALF_UP) // зп в минуту
             .multiply(BigDecimal(timeSummary), MathContext(20, RoundingMode.HALF_UP)) // минуты за период
             .toBigInteger()
 
-        ReportFormatterUtils.addWorkReportFooter(textSummary, timeSummary , salary.toInt())
+        ReportFormatterUtils.addWorkReportFooter(textSummary, timeSummary, salary.toInt())
 
         workTimesheetRepository.saveAll(notAccountedTimesheets)
         workReportRepository.save(WorkReport(UUID.randomUUID(), employeeId, workingDays, salary))

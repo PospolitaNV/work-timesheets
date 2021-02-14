@@ -13,7 +13,7 @@ import java.time.ZoneId
 
 @Service
 class CheckInService(
-    val workTimesheetRepository: WorkTimesheetRepository
+    private val workTimesheetRepository: WorkTimesheetRepository
 ) {
     companion object {
         val log = getLogger(CheckInService::class.java.name)
@@ -34,10 +34,7 @@ class CheckInService(
     }
 
     private fun createEmptyTimesheet(employeeId: Long) = WorkTimesheet(
-        WorkTimesheetId(LocalDate.now(zoneId), employeeId),
-        startTime = null,
-        endTime = null,
-        takenIntoAccount = false
+        WorkTimesheetId(LocalDate.now(zoneId), employeeId)
     )
 
     private fun fillCheckInFields(
@@ -62,7 +59,7 @@ class CheckInService(
         }
     }
 
-    public fun getCurrentTime() = LocalDateTime.now(zoneId)
+    private fun getCurrentTime() = LocalDateTime.now(zoneId)
 
 
 }

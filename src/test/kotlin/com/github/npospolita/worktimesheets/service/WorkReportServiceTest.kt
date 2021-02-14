@@ -54,6 +54,36 @@ class WorkReportServiceTest(
     }
 
     @Test
+    fun makeReportTwice() {
+        employeeService.addEmployee(Employee(1L, "Kekes", "Maximus", 100))
+
+        saveTimesheet(10, 0, 20, 20, 1, false)
+        saveTimesheet(10, 0, 20, 20, 2, false)
+        saveTimesheet(10, 0, 20, 20, 3, false)
+        saveTimesheet(10, 0, 20, 20, 4, false)
+        saveTimesheet(10, 0, 20, 20, 5, false)
+
+        workReportService.makeReport(1L)
+
+        var reports = workReportRepository.findAllByEmployeeId(1L)
+        assertEquals(1, reports.size)
+        assertEquals(BigInteger.valueOf(5166L), reports[0].amount)
+        assertEquals(
+            listOf(
+                LocalDate.of(2021, 1, 1),
+                LocalDate.of(2021, 1, 2),
+                LocalDate.of(2021, 1, 3),
+                LocalDate.of(2021, 1, 4),
+                LocalDate.of(2021, 1, 5)
+            ), reports[0].days
+        )
+
+        workReportService.makeReport(1L)
+        reports = workReportRepository.findAllByEmployeeId(1L)
+        assertEquals(1, reports.size)
+    }
+
+    @Test
     fun makeReportWithNotEndedDate() {
         employeeService.addEmployee(Employee(1L, "Kekes", "Maximus", 100))
 

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class EmployeeService(
-    val employeeRepository: EmployeeRepository
+    private val employeeRepository: EmployeeRepository
 ) {
 
     fun addEmployee(employee: Employee) {

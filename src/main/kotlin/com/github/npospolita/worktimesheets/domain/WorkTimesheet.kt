@@ -8,12 +8,16 @@ import javax.persistence.EmbeddedId
 import javax.persistence.Entity
 
 @Embeddable
-data class WorkTimesheetId(var day: LocalDate,
-                      var employeeId: Long) : Serializable
+data class WorkTimesheetId(
+    var day: LocalDate,
+    var employeeId: Long
+) : Serializable
 
 @Entity
-data class WorkTimesheet(@EmbeddedId val id: WorkTimesheetId,
-                         var startTime: LocalDateTime?,
-                         var endTime: LocalDateTime?,
-                         var takenIntoAccount: Boolean)
+data class WorkTimesheet(
+    @EmbeddedId val id: WorkTimesheetId,
+    var startTime: LocalDateTime? = null,
+    var endTime: LocalDateTime? = null,
+    var takenIntoAccount: Boolean = false
+)
 
