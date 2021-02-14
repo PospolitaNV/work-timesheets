@@ -4,6 +4,9 @@ import com.github.kotlintelegrambot.Bot
 import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.command
+import com.github.kotlintelegrambot.entities.KeyboardReplyMarkup
+import com.github.kotlintelegrambot.entities.ReplyMarkup
+import com.github.kotlintelegrambot.entities.keyboard.KeyboardButton
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
 import org.slf4j.LoggerFactory
@@ -37,6 +40,12 @@ class BotConfig {
             dispatch {
                 command("hello") {
                     bot.sendMessage(message.chat.id, "Hey bruh!")
+                }
+                command("testKeyboard") {
+                    bot.sendMessage(message.chat.id, "testKeyboard",
+                        replyMarkup = KeyboardReplyMarkup(
+                            KeyboardButton("One"), KeyboardButton("Two"))
+                    )
                 }
             }
 
