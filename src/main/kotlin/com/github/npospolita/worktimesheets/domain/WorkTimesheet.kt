@@ -9,7 +9,7 @@ import javax.persistence.Entity
 
 @Embeddable
 data class WorkTimesheetId(var day: LocalDate,
-                      var employeeId: Int) : Serializable
+                      var employeeId: Long) : Serializable
 
 @Entity
 data class WorkTimesheet(@EmbeddedId val id: WorkTimesheetId,

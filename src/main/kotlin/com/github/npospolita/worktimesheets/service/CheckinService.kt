@@ -21,7 +21,7 @@ class CheckInService(
 
     private val zoneId = ZoneId.of("Europe/Moscow")
 
-    fun checkIn(checkInType: CheckInType, employeeId: Int) {
+    fun checkIn(checkInType: CheckInType, employeeId: Long) {
         log.info("Received check-in: {} for employee: {}", checkInType, employeeId)
 
         val workTimesheet = workTimesheetRepository.findById(WorkTimesheetId(LocalDate.now(zoneId), employeeId))
@@ -33,7 +33,7 @@ class CheckInService(
         log.info("Saved work-timesheet: {}", workTimesheetRepository.save(workTimesheet))
     }
 
-    private fun createEmptyTimesheet(employeeId: Int) = WorkTimesheet(
+    private fun createEmptyTimesheet(employeeId: Long) = WorkTimesheet(
         WorkTimesheetId(LocalDate.now(zoneId), employeeId),
         startTime = null,
         endTime = null,
