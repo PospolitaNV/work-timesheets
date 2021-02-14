@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository
 
 interface WorkTimesheetRepository : CrudRepository<WorkTimesheet, WorkTimesheetId> {
 
-    fun findAllByTakenIntoAccountFalse()
+    fun findAllByTakenIntoAccountFalseAndId_EmployeeId(id: Long): List<WorkTimesheet>
 
 }

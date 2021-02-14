@@ -15,5 +15,5 @@ data class WorkTimesheetId(var day: LocalDate,
 data class WorkTimesheet(@EmbeddedId val id: WorkTimesheetId,
                          var startTime: LocalDateTime?,
                          var endTime: LocalDateTime?,
-                         val takenIntoAccount: Boolean)
+                         var takenIntoAccount: Boolean)
 

@@ -49,7 +49,7 @@ class CheckInService(
                 if (workTimesheet.startTime != null)
                     throw ValidationError("Вы уже отмечали начало работы сегодня " + LocalDate.now(zoneId))
 
-                workTimesheet.startTime = LocalDateTime.now(zoneId)
+                workTimesheet.startTime = getCurrentTime()
             }
             CheckInType.OUT -> {
                 if (workTimesheet.startTime == null)
@@ -57,10 +57,12 @@ class CheckInService(
                 if (workTimesheet.endTime != null)
                     throw ValidationError("Вы уже отмечали конец работы сегодня " + LocalDate.now(zoneId))
 
-                workTimesheet.endTime = LocalDateTime.now(zoneId)
+                workTimesheet.endTime = getCurrentTime()
             }
         }
     }
+
+    public fun getCurrentTime() = LocalDateTime.now(zoneId)
 
 
 }
