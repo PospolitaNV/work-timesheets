@@ -17,5 +17,5 @@ jobs:
       - uses: actions/checkout@v1
       - name: Setup Kotlin
         uses: fwilhe2/setup-kotlin@0.2.0
-      - name: Publish
+      - name: Verify
         run: gradle build

@@ -13,7 +13,7 @@ data class WorkTimesheetId(var day: LocalDate,
 
 @Entity
 data class WorkTimesheet(@EmbeddedId val id: WorkTimesheetId,
-                         val startTime: LocalDateTime,
-                         val endTime: LocalDateTime,
+                         var startTime: LocalDateTime?,
+                         var endTime: LocalDateTime?,
                          val takenIntoAccount: Boolean)
 
