@@ -56,9 +56,3 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-tasks.register("runOnGitHub") { // 1
-    dependsOn(":build")
-    group = "custom"
-    description = "$ ./gradlew runOnGitHub # runs on GitHub Action"
-}
