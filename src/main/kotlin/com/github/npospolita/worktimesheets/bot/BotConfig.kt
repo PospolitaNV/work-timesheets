@@ -60,14 +60,14 @@ class BotConfig {
                         )
                     )
                 }
-                callbackQuery("callback1") {
-                    log.info("test1")
-                    log.info("$update")
-                }
-                callbackQuery("callback1") {
-                    log.info("test2")
-                    log.info("$update")
-                }
+//                callbackQuery("callback1") {
+//                    log.info("test1")
+//                    log.info("$update")
+//                }
+//                callbackQuery("callback1") {
+//                    log.info("test2")
+//                    log.info("$update")
+//                }
             }
 
         }
