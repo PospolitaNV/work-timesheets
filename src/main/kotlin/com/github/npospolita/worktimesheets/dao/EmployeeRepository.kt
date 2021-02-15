@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository
 import java.util.*
 
 interface EmployeeRepository : CrudRepository<Employee, Long> {
-    fun findByFirstNameAndLastName(firstName: String, lastName: String) : Optional<Employee>
+    fun findByFirstNameAndLastName(firstName: String, lastName: String): Employee?
 }
