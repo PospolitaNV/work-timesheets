@@ -49,8 +49,8 @@ class BotConfig {
             dispatch {
 
             command("hello") {
-                    bot.sendMessage(message.chat.id, "Hey bruh!")
-                }
+                bot.sendMessage(message.chat.id, "Hey bruh!")
+            }
                 command("testKeyboard") {
                     bot.sendMessage(
                         message.chat.id, "testKeyboard",
@@ -59,14 +59,14 @@ class BotConfig {
                         )
                     )
                 }
-//                callbackQuery("callback1") {
-//                    log.info("test1")
-//                    log.info("$update")
-//                }
-//                callbackQuery("callback1") {
-//                    log.info("test2")
-//                    log.info("$update")
-//                }
+                callbackQuery("callback1") {
+                    log.info("test1")
+                    log.info("$update")
+                }
+                callbackQuery("callback1") {
+                    log.info("test2")
+                    log.info("$update")
+                }
             }
 
         }
