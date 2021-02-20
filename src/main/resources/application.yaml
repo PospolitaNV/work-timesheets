@@ -3,10 +3,10 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-  datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
-    username: ${SPRING_DATASOURCE_USERNAME:n.pospolita}
-    password: ${SPRING_DATASOURCE_PASSWORD:""}
+#  datasource:
+#    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
+#    username: ${SPRING_DATASOURCE_USERNAME:n.pospolita}
+#    password: ${SPRING_DATASOURCE_PASSWORD:""}
 
 bot:
   hosted.url: ${HOSTED_URL:localhost}
