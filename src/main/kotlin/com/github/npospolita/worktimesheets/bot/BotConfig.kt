@@ -28,53 +28,52 @@ class BotConfig {
     @Value("\${bot.token}")
     var botToken: String? = null
 
-//    @Bean
-//    fun telegramBot(
-//        @Autowired checkinService: CheckInService,
-//        @Autowired employeeService: EmployeeService,
-//        @Autowired securityService: SecurityService,
-//        @Autowired workReportService: WorkReportService,
-//        @Autowired workTimesheetService: WorkTimesheetService
-//    ): Bot {
-//        val bot = bot {
-//            token = botToken!!
-//            timeout = 30
-//            logLevel = LogLevel.Network.Body
-//
-//            webhook {
-//                url = "$hostedUrl/$botToken"
-//                allowedUpdates = listOf("message")
-//            }
-//
-//            dispatch {
-//                startCheckingUpdates()
-//                command("hello") {
-//
-//                    bot.sendMessage(message.chat.id, "Hey bruh!")
+    @Bean
+    fun telegramBot(
+        @Autowired checkinService: CheckInService,
+        @Autowired employeeService: EmployeeService,
+        @Autowired securityService: SecurityService,
+        @Autowired workReportService: WorkReportService,
+        @Autowired workTimesheetService: WorkTimesheetService
+    ): Bot {
+        val bot = bot {
+            token = botToken!!
+            timeout = 30
+            logLevel = LogLevel.Network.Body
+
+            webhook {
+                url = "$hostedUrl/$botToken"
+                allowedUpdates = listOf("message")
+            }
+
+            dispatch {
+                startCheckingUpdates()
+                command("hello") {
+                    bot.sendMessage(message.chat.id, "Hey bruh!")
+                }
+                command("testKeyboard") {
+                    bot.sendMessage(
+                        message.chat.id, "testKeyboard",
+                        replyMarkup = KeyboardReplyMarkup(
+                            KeyboardButton("One"), KeyboardButton("Two")
+                        )
+                    )
+                }
+//                callbackQuery("callback1") {
+//                    log.info("test1")
+//                    log.info("$update")
 //                }
-//                command("testKeyboard") {
-//                    bot.sendMessage(
-//                        message.chat.id, "testKeyboard",
-//                        replyMarkup = KeyboardReplyMarkup(
-//                            KeyboardButton("One"), KeyboardButton("Two")
-//                        )
-//                    )
+//                callbackQuery("callback1") {
+//                    log.info("test2")
+//                    log.info("$update")
 //                }
-////                callbackQuery("callback1") {
-////                    log.info("test1")
-////                    log.info("$update")
-////                }
-////                callbackQuery("callback1") {
-////                    log.info("test2")
-////                    log.info("$update")
-////                }
-//            }
-//
-//        }
-//
-//        bot.startWebhook()
-//
-//        return bot
-//    }
+            }
+
+        }
+
+        bot.startWebhook()
+
+        return bot
+    }
 
 }
