@@ -47,8 +47,8 @@ class BotConfig {
             }
 
             dispatch {
-                startCheckingUpdates()
-                command("hello") {
+
+            command("hello") {
                     bot.sendMessage(message.chat.id, "Hey bruh!")
                 }
                 command("testKeyboard") {
