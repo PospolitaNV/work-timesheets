@@ -4,7 +4,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
+    url: jdbc:${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
 
