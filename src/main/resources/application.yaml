@@ -1,4 +1,17 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
+    username: ${JDBC_DATABASE_USERNAME:n.pospolita}
+    password: ${JDBC_DATABASE_PASSWORD:""}
+
+bot:
+  hosted.url: ${HOSTED_URL:localhost}
+  token: ${BOT_TOKEN:test}
+  domain:
+    adminId: ${ADMIN_ID:23452397}
+
+server.port: ${PORT:8080}
