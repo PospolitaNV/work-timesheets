@@ -5,8 +5,8 @@ import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
-import com.github.kotlintelegrambot.entities.KeyboardReplyMarkup
-import com.github.kotlintelegrambot.entities.keyboard.KeyboardButton
+import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
+import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
 import com.github.npospolita.worktimesheets.service.*
@@ -48,14 +48,20 @@ class BotConfig {
 
             dispatch {
 
-            command("hello") {
-                bot.sendMessage(message.chat.id, "Hey bruh!")
-            }
+                command("hello") {
+                    bot.sendMessage(message.chat.id, "Hey bruh!")
+                }
                 command("testKeyboard") {
                     bot.sendMessage(
                         message.chat.id, "testKeyboard",
-                        replyMarkup = KeyboardReplyMarkup(
-                            KeyboardButton("One"), KeyboardButton("Two")
+                        replyMarkup = InlineKeyboardMarkup.create(
+                            listOf(
+                                InlineKeyboardButton.CallbackData(
+                                    text = "Test Inline Button",
+                                    callbackData = "callback1"
+                                )
+                            ),
+                            listOf(InlineKeyboardButton.CallbackData(text = "Show alert", callbackData = "showAlert"))
                         )
                     )
                 }
@@ -63,7 +69,7 @@ class BotConfig {
                     log.info("test1")
                     log.info("$update")
                 }
-                callbackQuery("callback1") {
+                callbackQuery("showAlert") {
                     log.info("test2")
                     log.info("$update")
                 }
