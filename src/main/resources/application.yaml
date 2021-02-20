@@ -5,8 +5,6 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
   datasource:
     url: "jdbc:${HEROKU_POSTGRESQL_YELLOW_URL}"
-#    username: ${JDBC_DATABASE_USERNAME}
-#    password: ${JDBC_DATABASE_PASSWORD}
 
 bot:
   hosted.url: ${HOSTED_URL:localhost}
