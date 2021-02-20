@@ -2,7 +2,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
   datasource:
     url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
     username: ${JDBC_DATABASE_USERNAME:n.pospolita}
