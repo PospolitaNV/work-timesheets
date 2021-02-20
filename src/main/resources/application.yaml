@@ -4,9 +4,9 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
   datasource:
-    url: ${JDBC_DATABASE_URL}
-    username: ${JDBC_DATABASE_USERNAME}
-    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://localhost:5432/n.pospolita}
+    username: ${JDBC_DATABASE_USERNAME:n.pospolita}
+    password: ${JDBC_DATABASE_PASSWORD:""}
 
 bot:
   hosted.url: ${HOSTED_URL:localhost}
