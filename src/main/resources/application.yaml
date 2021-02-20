@@ -13,3 +13,5 @@ bot:
   token: ${BOT_TOKEN:test}
   domain:
     adminId: ${ADMIN_ID:23452397}
+
+server.port: ${PORT:8080}
