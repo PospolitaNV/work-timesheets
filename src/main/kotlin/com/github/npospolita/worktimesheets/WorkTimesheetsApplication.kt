@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.context.ApplicationContext
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.annotation.Order
 import javax.sql.DataSource
 
 
@@ -20,6 +21,7 @@ class WorkTimesheetsApplication {
 class DatabaseConfig {
 
     @Bean
+    @Order(Int.MAX_VALUE)
     fun dataSource(appContext: ApplicationContext): DataSource {
         println()
         println("HEROKU_POSTGRESQL_YELLOW_URL:" + appContext.environment.getProperty("HEROKU_POSTGRESQL_YELLOW_URL"))
