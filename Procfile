@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -Dhttp.port=$PORT -jar build/libs/work-timesheets-fat-0.0.1-SNAPSHOT.jar
+web: java $JAVA_OPTS -Dhttp.port=$PORT -jar build/libs/work-timesheets-0.0.1-SNAPSHOT.jar
