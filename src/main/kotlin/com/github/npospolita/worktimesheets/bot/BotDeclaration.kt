@@ -40,7 +40,7 @@ class BotDeclaration {
         val bot = bot {
             token = botToken!!
             timeout = 30
-            logLevel = LogLevel.Network.Body
+            logLevel = LogLevel.None
 
             webhook {
                 url = "$hostedUrl/$botToken"
@@ -57,7 +57,7 @@ class BotDeclaration {
                         ErrorHandlers.unknownUser()
                     )
                 }
-                callbackQuery("salary") {
+                callbackQuery("salaryOptions") {
                     log.info("salary handler")
                     doBasedOnAuth(
                         securityService,
