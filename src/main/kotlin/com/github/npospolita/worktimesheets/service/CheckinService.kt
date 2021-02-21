@@ -22,7 +22,7 @@ class CheckInService(
     private val zoneId = ZoneId.of("Europe/Moscow")
 
     fun checkIn(checkInType: CheckInType, employeeId: Long) {
-        log.info("Received check-in: {} for employee: {}", checkInType, employeeId)
+        log.info("Received check_in: {} for employee: {}", checkInType, employeeId)
 
         val workTimesheet = workTimesheetRepository.findById(WorkTimesheetId(LocalDate.now(zoneId), employeeId))
             .orElse(createEmptyTimesheet(employeeId))

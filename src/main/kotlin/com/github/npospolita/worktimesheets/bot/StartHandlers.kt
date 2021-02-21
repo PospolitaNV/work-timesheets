@@ -29,17 +29,17 @@ class StartHandlers {
             listOf(
                 InlineKeyboardButton.CallbackData(
                     text = "Отметить приход",
-                    callbackData = "check-in"
+                    callbackData = "check_in"
                 ),
                 InlineKeyboardButton.CallbackData(
                     text = "Отметить уход",
-                    callbackData = "check-out"
+                    callbackData = "check_out"
                 )
             ),
             listOf(
                 InlineKeyboardButton.CallbackData(
                     text = "Посмотреть статистику",
-                    callbackData = "employee-stats"
+                    callbackData = "employee_stats"
                 ),
             )
         )
@@ -52,7 +52,7 @@ class StartHandlers {
                 ),
                 InlineKeyboardButton.CallbackData(
                     text = "Расчёт зарплаты",
-                    callbackData = "salaryOptions"
+                    callbackData = "salary_options"
                 )
             )
         )

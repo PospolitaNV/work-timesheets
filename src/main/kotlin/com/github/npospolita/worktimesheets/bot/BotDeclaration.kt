@@ -57,7 +57,7 @@ class BotDeclaration {
                         ErrorHandlers.unknownUser()
                     )
                 }
-                callbackQuery("salaryOptions") {
+                callbackQuery("salary_options") {
                     log.info("salary handler")
                     doBasedOnAuth(
                         securityService,
@@ -66,7 +66,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("salaryСalculation") {
+                callbackQuery("salary_calculation") {
                     doBasedOnAuth(
                         securityService,
                         SalaryHandlers.salaryCalculation(workReportService),
@@ -74,7 +74,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("employeeStats") {
+                callbackQuery("employee_stats") {
                     doBasedOnAuth(
                         securityService,
                         EmployeeHandlers.adminEmployeeStats(workTimesheetService),
@@ -82,7 +82,15 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("check-in") {
+                callbackQuery("employee_list") {
+                    doBasedOnAuth(
+                        securityService,
+                        EmployeeHandlers.employeeList(employeeService),
+                        ErrorHandlers.accessDenied(),
+                        ErrorHandlers.accessDenied()
+                    )
+                }
+                callbackQuery("check_in") {
                     doBasedOnAuth(
                         securityService,
                         ErrorHandlers.accessDenied(),
@@ -90,7 +98,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("check-out") {
+                callbackQuery("check_out") {
                     doBasedOnAuth(
                         securityService,
                         ErrorHandlers.accessDenied(),

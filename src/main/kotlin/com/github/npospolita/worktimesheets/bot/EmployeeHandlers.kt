@@ -1,6 +1,7 @@
 package com.github.npospolita.worktimesheets.bot
 
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
+import com.github.npospolita.worktimesheets.service.EmployeeService
 import com.github.npospolita.worktimesheets.service.WorkTimesheetService
 
 class EmployeeHandlers {
@@ -22,6 +23,17 @@ class EmployeeHandlers {
                 bot.sendMessage(
                     getChatId(update),
                     if (text.isBlank()) "Графики пустые!" else text,
+                    replyMarkup = StartHandlers.adminStartKeyboardMarkup()
+                )
+            }
+        }
+
+        fun employeeList(employeeService: EmployeeService): HandleUpdate {
+            return { bot, update ->
+                val text = employeeService.getEmployees()
+                bot.sendMessage(
+                    getChatId(update),
+                    if (text.isBlank()) "Пока что у вас нет сотрудников!" else text,
                     replyMarkup = StartHandlers.adminStartKeyboardMarkup()
                 )
             }

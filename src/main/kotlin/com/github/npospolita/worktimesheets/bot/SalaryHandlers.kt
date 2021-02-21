@@ -3,6 +3,7 @@ package com.github.npospolita.worktimesheets.bot
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
+
 import com.github.npospolita.worktimesheets.service.WorkReportService
 import org.slf4j.LoggerFactory
 
@@ -29,11 +30,11 @@ class SalaryHandlers {
                         listOf(
                             InlineKeyboardButton.CallbackData(
                                 text = "Посчитать зарплату",
-                                callbackData = "salaryСalculation"
+                                callbackData = "salary_calculation"
                             ),
                             InlineKeyboardButton.CallbackData(
                                 text = "Посмотреть статистику работников",
-                                callbackData = "employeeStats"
+                                callbackData = "employee_stats"
                             )
                         )
                     )
