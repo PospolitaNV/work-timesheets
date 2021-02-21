@@ -29,7 +29,7 @@ class WorkReportService(
     }
 
     @Transactional
-    fun makeReport(employeeId: Long): String {
+    fun makeReport(employeeId: Long): String? {
         val employee = employeeRepository.findByIdOrNull(employeeId)
         log.info("Starting to calculate employee's salary:{}", employee)
 
@@ -37,7 +37,7 @@ class WorkReportService(
 
         if (notAccountedTimesheets.isEmpty()) {
             log.info("Employee's {} timesheets are empty.", employee)
-            return "У этого сотрудника ещё нет неоплаченных записей о работе"
+            return null
         }
 
         val workingDays = ArrayList<LocalDate>()
@@ -72,16 +72,17 @@ class WorkReportService(
         return textSummary.toString()
     }
 
-    fun makeAllReports(): String {
+    fun makeAllReports(): String? {
         val stringBuilder = StringBuilder()
         for (employee in employeeRepository.findAll()) {
-            stringBuilder.append(this.makeReport(employee.id)).append("\n\n");
+            val report = this.makeReport(employee.id)
+            if (report != null) stringBuilder.append(report).append("\n\n")
         }
         return stringBuilder.toString()
     }
 
 
-    fun makeReport(employeeFullName: String): String {
+    fun makeReport(employeeFullName: String): String? {
         val firstAndLastName = employeeFullName.split(" ")
         if (firstAndLastName.size != 2) throw ValidationError("Введите правильные Фамилию и Имя пользователя")
         val employee = employeeRepository.findByFirstNameAndLastName(firstAndLastName[0], firstAndLastName[1])

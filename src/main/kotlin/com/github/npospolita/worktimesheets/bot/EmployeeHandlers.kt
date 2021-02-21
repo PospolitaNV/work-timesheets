@@ -8,7 +8,7 @@ class EmployeeHandlers {
     companion object {
         fun employeeStats(workTimesheetService: WorkTimesheetService): HandleUpdate {
             return { bot, update ->
-                val text = workTimesheetService.checkTimesheets(getUserId(update))
+                val text = workTimesheetService.checkTimesheet(getUserId(update))
                 bot.sendMessage(
                     getChatId(update),
                     if (text.isBlank()) "График пустой!" else text,
