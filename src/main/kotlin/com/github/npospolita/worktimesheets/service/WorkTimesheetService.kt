@@ -27,10 +27,10 @@ class WorkTimesheetService(
 
         ReportFormatterUtils.addWorkReportHeader(stringBuilder, employee!!)
 
-        notAccountedTimesheets.stream().map { day ->
+        for (day in notAccountedTimesheets) {
             ReportFormatterUtils.addWorkReportDayTimesheet(stringBuilder, day, null)
         }
-        log.info("Employee's {} timesheets:", employee)
+
         log.info(stringBuilder.toString())
 
         return stringBuilder.toString()
