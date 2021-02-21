@@ -10,7 +10,7 @@ class StartHandlers {
         fun admin(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
+                    getChatId(update), "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(
@@ -30,7 +30,7 @@ class StartHandlers {
         fun employee(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
+                    getChatId(update), "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(

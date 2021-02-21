@@ -7,7 +7,7 @@ class ErrorHandlers {
         fun unknownUser(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    getChatId(update),
                     "Вы не зарегистрированы в системе ):"
                 )
             }
@@ -16,7 +16,7 @@ class ErrorHandlers {
         fun accessDenied(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    getChatId(update),
                     "У вас нет сюда доступа :P"
                 )
             }

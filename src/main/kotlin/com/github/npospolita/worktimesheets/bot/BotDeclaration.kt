@@ -8,8 +8,6 @@ import com.github.kotlintelegrambot.dispatcher.command
 import com.github.kotlintelegrambot.dispatcher.handlers.CallbackQueryHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.CommandHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
-import com.github.kotlintelegrambot.dispatcher.handlers.Handler
-import com.github.kotlintelegrambot.entities.Update
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
 import com.github.npospolita.worktimesheets.service.*

@@ -14,7 +14,7 @@ class SalaryHandlers {
             return { bot, update ->
                 workReportService.makeAllReports()
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    getChatId(update),
                     workReportService.makeAllReports()
                 )
             }
@@ -23,7 +23,7 @@ class SalaryHandlers {
         fun salaryOptions(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
+                    getChatId(update), "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(

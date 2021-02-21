@@ -15,7 +15,7 @@ class CheckInOutHandlers {
                 try {
                     checkInService.checkIn(
                         CheckInType.IN,
-                        update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!
+                        getChatId(update)
                     )
                 } catch (e: ValidationError) {
                     message = e.message!!
@@ -30,7 +30,7 @@ class CheckInOutHandlers {
                 try {
                     checkInService.checkIn(
                         CheckInType.OUT,
-                        update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!
+                        getChatId(update)
                     )
                 } catch (e: ValidationError) {
                     message = e.message!!

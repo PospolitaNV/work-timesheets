@@ -8,7 +8,7 @@ class EmployeeHandlers {
         fun employeeStats(workTimesheetService: WorkTimesheetService): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    getChatId(update),
                     workTimesheetService.checkTimesheets(update.message?.from?.id!!)
                 )
             }
@@ -17,7 +17,7 @@ class EmployeeHandlers {
         fun adminEmployeeStats(workTimesheetService: WorkTimesheetService): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    getChatId(update),
                     workTimesheetService.checkTimesheets()
                 )
             }
