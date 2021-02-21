@@ -3,13 +3,13 @@ package com.github.npospolita.worktimesheets.bot
 import com.github.kotlintelegrambot.entities.Update
 
 fun getChatId(update: Update): Long {
-    update.callbackQuery ?: return update.callbackQuery?.message?.chat?.id!!
-    update.message ?: return update.message?.chat?.id!!
+    if (update.callbackQuery != null) return update.callbackQuery?.message?.chat?.id!!
+    if (update.message != null) return update.message?.chat?.id!!
     throw Error("Can't extract chat id")
 }
 
 fun getUserId(update: Update): Long {
-    update.callbackQuery ?: return update.callbackQuery?.message?.from?.id!!
-    update.message ?: return update.message?.from?.id!!
+    if (update.callbackQuery != null) return update.callbackQuery?.from?.id!!
+    if (update.message != null && update.message?.from != null) return update.message?.from?.id!!
     throw Error("Can't extract user id")
 }
