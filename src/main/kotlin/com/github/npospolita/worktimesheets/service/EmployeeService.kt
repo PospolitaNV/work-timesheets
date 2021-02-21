@@ -30,7 +30,7 @@ class EmployeeService(
         val stringBuilder = StringBuilder()
         for (employee in employeeRepository.findAll()) {
             stringBuilder.append("Имя: ${employee.firstName} ${employee.lastName}\n")
-                .append("Запрлата: ${employee.wage}\n\n")
+                .append("Зарплата: ${employee.wage}руб/час\n\n")
         }
         return stringBuilder.toString()
     }
