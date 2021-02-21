@@ -115,7 +115,7 @@ private fun CommandHandlerEnvironment.doBasedOnAuth(
     knownUserHandler: HandleUpdate,
     unknownUserHandler: HandleUpdate
 ) {
-    val userId = update.message?.from?.id!!
+    val userId = getUserId(update)
     when {
         securityService.isAdmin(userId) -> {
             adminHandler.invoke(bot, update)
@@ -135,7 +135,7 @@ private fun CallbackQueryHandlerEnvironment.doBasedOnAuth(
     knownUserHandler: HandleUpdate,
     unknownUserHandler: HandleUpdate
 ) {
-    val userId = update.message?.from?.id!!
+    val userId = getUserId(update)
     when {
         securityService.isAdmin(userId) -> {
             adminHandler.invoke(bot, update)

@@ -20,7 +20,7 @@ class CheckInOutHandlers {
                 } catch (e: ValidationError) {
                     message = e.message!!
                 }
-                bot.sendMessage(update.message?.chat?.id!!, message)
+                bot.sendMessage(getChatId(update), message)
             }
         }
 
@@ -35,7 +35,7 @@ class CheckInOutHandlers {
                 } catch (e: ValidationError) {
                     message = e.message!!
                 }
-                bot.sendMessage(update.message?.chat?.id!!, message)
+                bot.sendMessage(getChatId(update), message)
             }
         }
     }

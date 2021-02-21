@@ -1,6 +1,7 @@
 package com.github.npospolita.worktimesheets.bot
 
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
+import com.github.kotlintelegrambot.entities.Update
 import com.github.npospolita.worktimesheets.service.WorkTimesheetService
 
 class EmployeeHandlers {
@@ -9,7 +10,7 @@ class EmployeeHandlers {
             return { bot, update ->
                 bot.sendMessage(
                     getChatId(update),
-                    workTimesheetService.checkTimesheets(update.message?.from?.id!!)
+                    workTimesheetService.checkTimesheets(getUserId(update))
                 )
             }
         }
