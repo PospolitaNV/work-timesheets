@@ -30,11 +30,11 @@ class SalaryHandlers {
                         listOf(
                             InlineKeyboardButton.CallbackData(
                                 text = "Посчитать зарплату",
-                                callbackData = "salary-calculation"
+                                callbackData = "salaryСalculation"
                             ),
                             InlineKeyboardButton.CallbackData(
                                 text = "Посмотреть статистику работников",
-                                callbackData = "employee-stats"
+                                callbackData = "employeeStats"
                             )
                         )
                     )

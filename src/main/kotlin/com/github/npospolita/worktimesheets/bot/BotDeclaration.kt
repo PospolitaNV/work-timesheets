@@ -66,7 +66,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("salary-calculation") {
+                callbackQuery("salaryСalculation") {
                     doBasedOnAuth(
                         securityService,
                         SalaryHandlers.salaryCalculation(workReportService),
@@ -74,7 +74,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("employee-stats") {
+                callbackQuery("employeeStats") {
                     doBasedOnAuth(
                         securityService,
                         EmployeeHandlers.adminEmployeeStats(workTimesheetService),
