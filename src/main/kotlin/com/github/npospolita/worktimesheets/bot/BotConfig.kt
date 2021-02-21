@@ -5,7 +5,9 @@ import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
+import com.github.kotlintelegrambot.dispatcher.handlers.CommandHandlerEnvironment
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
+import com.github.kotlintelegrambot.entities.Update
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
@@ -48,8 +50,52 @@ class BotConfig {
 
             dispatch {
 
-                command("hello") {
-                    bot.sendMessage(message.chat.id, "Hey bruh!")
+                command("start") {
+                    doBasedOnAuth(securityService,
+                        { bot, update ->
+                            bot.sendMessage(
+                                update.message?.chat?.id!!, "Выберите операцию",
+                                replyMarkup = InlineKeyboardMarkup.create(
+                                    listOf(
+                                        InlineKeyboardButton.CallbackData(
+                                            text = "Сотрудники",
+                                            callbackData = "employees"
+                                        ),
+                                        InlineKeyboardButton.CallbackData(
+                                            text = "Расчёт зарплаты",
+                                            callbackData = "salary"
+                                        )
+                                    )
+                                )
+                            )
+                        },
+                        { bot, update ->
+                            bot.sendMessage(
+                                update.message?.chat?.id!!, "Выберите операцию",
+                                replyMarkup = InlineKeyboardMarkup.create(
+                                    listOf(
+                                        InlineKeyboardButton.CallbackData(
+                                            text = "Отметить приход",
+                                            callbackData = "check-in"
+                                        ),
+                                        InlineKeyboardButton.CallbackData(
+                                            text = "Отметить уход",
+                                            callbackData = "check-out"
+                                        )
+                                    ),
+                                    listOf(
+                                        InlineKeyboardButton.CallbackData(
+                                            text = "Посмотреть статистику",
+                                            callbackData = "employee-stats"
+                                        ),
+                                    )
+                                )
+                            )
+                        },
+                        { bot, update ->
+                            bot.sendMessage(update.message?.chat?.id!!, "Вы не зарегистрированы в системе ):")
+                        }
+                    )
                 }
                 command("testKeyboard") {
                     bot.sendMessage(
@@ -82,4 +128,24 @@ class BotConfig {
         return bot
     }
 
+}
+
+private fun CommandHandlerEnvironment.doBasedOnAuth(
+    securityService: SecurityService,
+    adminHandler: (bot: Bot, update: Update) -> Unit,
+    knownUserHandler: (bot: Bot, update: Update) -> Unit,
+    unknownUserHandler: (bot: Bot, update: Update) -> Unit
+) {
+    val userId = update.message?.from?.id!!
+    when {
+        securityService.isAdmin(userId) -> {
+            adminHandler.invoke(bot, update)
+        }
+        securityService.isKnownUser(userId) -> {
+            knownUserHandler.invoke(bot, update)
+        }
+        else -> {
+            unknownUserHandler.invoke(bot, update)
+        }
+    }
 }
