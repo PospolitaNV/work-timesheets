@@ -12,10 +12,10 @@ class SalaryHandlers {
 
         fun salaryCalculation(workReportService: WorkReportService): HandleUpdate {
             return { bot, update ->
-                workReportService.makeAllReports()
+                val text = workReportService.makeAllReports()
                 bot.sendMessage(
                     getChatId(update),
-                    workReportService.makeAllReports()
+                    if (text.isBlank()) "Отчёты пустые!" else text
                 )
             }
         }
