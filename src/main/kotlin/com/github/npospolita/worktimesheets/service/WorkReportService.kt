@@ -72,7 +72,7 @@ class WorkReportService(
         return textSummary.toString()
     }
 
-    fun makeAllReports(): String? {
+    fun makeAllReports(): String {
         val stringBuilder = StringBuilder()
         for (employee in employeeRepository.findAll()) {
             val report = this.makeReport(employee.id)
