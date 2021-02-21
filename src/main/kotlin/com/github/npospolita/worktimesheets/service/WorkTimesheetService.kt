@@ -35,4 +35,12 @@ class WorkTimesheetService(
         return stringBuilder.toString()
     }
 
+    fun checkTimesheets(): String {
+        val stringBuilder = StringBuilder()
+        for (employee in employeeRepository.findAll()) {
+            stringBuilder.append(this.checkTimesheets(employee.id)).append("\n\n");
+        }
+        return stringBuilder.toString()
+    }
+
 }

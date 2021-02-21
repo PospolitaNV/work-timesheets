@@ -72,10 +72,12 @@ class WorkReportService(
         return textSummary.toString()
     }
 
-    fun makeAllReports() {
+    fun makeAllReports(): String {
+        val stringBuilder = StringBuilder()
         for (employee in employeeRepository.findAll()) {
-            this.makeReport(employee.id)
+            stringBuilder.append(this.makeReport(employee.id)).append("\n\n");
         }
+        return stringBuilder.toString()
     }
 
 
