@@ -1,17 +1,16 @@
 package com.github.npospolita.worktimesheets.bot
 
-import com.github.kotlintelegrambot.Bot
-import com.github.kotlintelegrambot.entities.Update
+import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 
 class ErrorHandlers {
     companion object {
-        fun unknownUser(): (bot: Bot, update: Update) -> Unit {
+        fun unknownUser(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(update.message?.chat?.id!!, "Вы не зарегистрированы в системе ):")
             }
         }
 
-        fun accessDenied(): (bot: Bot, update: Update) -> Unit {
+        fun accessDenied(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(update.message?.chat?.id!!, "У вас нет сюда доступа :P")
             }

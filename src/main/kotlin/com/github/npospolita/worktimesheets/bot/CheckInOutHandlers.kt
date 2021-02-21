@@ -1,14 +1,13 @@
 package com.github.npospolita.worktimesheets.bot
 
-import com.github.kotlintelegrambot.Bot
-import com.github.kotlintelegrambot.entities.Update
+import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.npospolita.worktimesheets.domain.CheckInType
 import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import com.github.npospolita.worktimesheets.service.CheckInService
 
 class CheckInOutHandlers {
     companion object {
-        fun checkIn(checkInService: CheckInService): (bot: Bot, update: Update) -> Unit {
+        fun checkIn(checkInService: CheckInService): HandleUpdate {
             return { bot, update ->
                 var message = "Вы успешно отметили свой приход"
                 try {
@@ -20,7 +19,7 @@ class CheckInOutHandlers {
             }
         }
 
-        fun checkOut(checkInService: CheckInService): (bot: Bot, update: Update) -> Unit {
+        fun checkOut(checkInService: CheckInService): HandleUpdate {
             return { bot, update ->
                 var message = "Вы успешно отметили свой уход"
                 try {

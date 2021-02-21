@@ -1,17 +1,15 @@
 package com.github.npospolita.worktimesheets.bot
 
 import com.github.kotlintelegrambot.Bot
-import com.github.kotlintelegrambot.dispatcher.Dispatcher
-import com.github.kotlintelegrambot.dispatcher.command
+import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
 import com.github.kotlintelegrambot.entities.Update
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
-import com.github.npospolita.worktimesheets.service.SecurityService
 
 class StartHandlers {
     companion object {
 
-        fun admin(): (bot: Bot, update: Update) -> Unit {
+        fun admin(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
                     update.message?.chat?.id!!, "Выберите операцию",
@@ -31,7 +29,7 @@ class StartHandlers {
             }
         }
 
-        fun employee(): (bot: Bot, update: Update) -> Unit {
+        fun employee(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
                     update.message?.chat?.id!!, "Выберите операцию",

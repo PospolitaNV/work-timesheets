@@ -1,12 +1,11 @@
 package com.github.npospolita.worktimesheets.bot
 
-import com.github.kotlintelegrambot.Bot
-import com.github.kotlintelegrambot.entities.Update
+import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.npospolita.worktimesheets.service.WorkTimesheetService
 
 class EmployeeHandlers {
     companion object {
-        fun employeeStats(workTimesheetService: WorkTimesheetService): (bot: Bot, update: Update) -> Unit {
+        fun employeeStats(workTimesheetService: WorkTimesheetService): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
                     update.message?.chat?.id!!,
@@ -15,7 +14,7 @@ class EmployeeHandlers {
             }
         }
 
-        fun adminEmployeeStats(workTimesheetService: WorkTimesheetService): (bot: Bot, update: Update) -> Unit {
+        fun adminEmployeeStats(workTimesheetService: WorkTimesheetService): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
                     update.message?.chat?.id!!,

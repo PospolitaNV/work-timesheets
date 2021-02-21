@@ -7,9 +7,7 @@ import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
 import com.github.kotlintelegrambot.dispatcher.handlers.CallbackQueryHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.CommandHandlerEnvironment
-import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
-import com.github.kotlintelegrambot.entities.Update
-import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
+import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
 import com.github.npospolita.worktimesheets.service.*
@@ -50,8 +48,8 @@ class BotDeclaration {
             }
 
             dispatch {
-
                 command("start") {
+                    log.info("start handler")
                     doBasedOnAuth(
                         securityService,
                         StartHandlers.admin(),
@@ -60,6 +58,7 @@ class BotDeclaration {
                     )
                 }
                 callbackQuery("salary") {
+                    log.info("salary handler")
                     doBasedOnAuth(
                         securityService,
                         SalaryHandlers.salaryOptions(),
@@ -112,9 +111,9 @@ class BotDeclaration {
 
 private fun CommandHandlerEnvironment.doBasedOnAuth(
     securityService: SecurityService,
-    adminHandler: (bot: Bot, update: Update) -> Unit,
-    knownUserHandler: (bot: Bot, update: Update) -> Unit,
-    unknownUserHandler: (bot: Bot, update: Update) -> Unit
+    adminHandler: HandleUpdate,
+    knownUserHandler: HandleUpdate,
+    unknownUserHandler: HandleUpdate
 ) {
     val userId = update.message?.from?.id!!
     when {
@@ -132,9 +131,9 @@ private fun CommandHandlerEnvironment.doBasedOnAuth(
 
 private fun CallbackQueryHandlerEnvironment.doBasedOnAuth(
     securityService: SecurityService,
-    adminHandler: (bot: Bot, update: Update) -> Unit,
-    knownUserHandler: (bot: Bot, update: Update) -> Unit,
-    unknownUserHandler: (bot: Bot, update: Update) -> Unit
+    adminHandler: HandleUpdate,
+    knownUserHandler: HandleUpdate,
+    unknownUserHandler: HandleUpdate
 ) {
     val userId = update.message?.from?.id!!
     when {
