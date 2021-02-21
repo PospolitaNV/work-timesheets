@@ -21,6 +21,6 @@ internal class ReportFormatterUtilsTest {
             ), null
         )
 
-        assertEquals("01-01-2020: 00:00 - null", stringBuilder.toString())
+        assertEquals("01-01-2020: 00:00 - ???", stringBuilder.toString())
     }
 }
