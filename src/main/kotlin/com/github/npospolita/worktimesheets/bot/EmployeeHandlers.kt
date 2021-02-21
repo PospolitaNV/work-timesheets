@@ -1,7 +1,8 @@
 package com.github.npospolita.worktimesheets.bot
 
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
-import com.github.kotlintelegrambot.entities.Update
+import com.github.npospolita.worktimesheets.bot.StartHandlers.Companion.adminStartKeyboardMarkup
+import com.github.npospolita.worktimesheets.bot.StartHandlers.Companion.employeeStartKeyboardMarkup
 import com.github.npospolita.worktimesheets.service.WorkTimesheetService
 
 class EmployeeHandlers {
@@ -11,7 +12,8 @@ class EmployeeHandlers {
                 val text = workTimesheetService.checkTimesheets(getUserId(update))
                 bot.sendMessage(
                     getChatId(update),
-                    if (text.isBlank()) "График пустой!" else text
+                    if (text.isBlank()) "График пустой!" else text,
+                    replyMarkup = employeeStartKeyboardMarkup()
                 )
             }
         }
@@ -21,7 +23,8 @@ class EmployeeHandlers {
                 val text = workTimesheetService.checkTimesheets()
                 bot.sendMessage(
                     getChatId(update),
-                    if (text.isBlank()) "Графики пустые!" else text
+                    if (text.isBlank()) "Графики пустые!" else text,
+                    replyMarkup = adminStartKeyboardMarkup()
                 )
             }
         }

@@ -3,6 +3,7 @@ package com.github.npospolita.worktimesheets.bot
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
+import com.github.npospolita.worktimesheets.bot.StartHandlers.Companion.adminStartKeyboardMarkup
 import com.github.npospolita.worktimesheets.service.WorkReportService
 import org.slf4j.LoggerFactory
 
@@ -15,7 +16,8 @@ class SalaryHandlers {
                 val text = workReportService.makeAllReports()
                 bot.sendMessage(
                     getChatId(update),
-                    if (text.isBlank()) "Отчёты пустые!" else text
+                    if (text.isBlank()) "Отчёты пустые!" else text,
+                    replyMarkup = adminStartKeyboardMarkup()
                 )
             }
         }

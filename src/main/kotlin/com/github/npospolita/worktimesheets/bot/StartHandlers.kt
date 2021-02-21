@@ -11,18 +11,7 @@ class StartHandlers {
             return { bot, update ->
                 bot.sendMessage(
                     getChatId(update), "Выберите операцию",
-                    replyMarkup = InlineKeyboardMarkup.create(
-                        listOf(
-                            InlineKeyboardButton.CallbackData(
-                                text = "Сотрудники",
-                                callbackData = "employee_list"
-                            ),
-                            InlineKeyboardButton.CallbackData(
-                                text = "Расчёт зарплаты",
-                                callbackData = "salary"
-                            )
-                        )
-                    )
+                    replyMarkup = adminStartKeyboardMarkup()
                 )
             }
         }
@@ -31,27 +20,42 @@ class StartHandlers {
             return { bot, update ->
                 bot.sendMessage(
                     getChatId(update), "Выберите операцию",
-                    replyMarkup = InlineKeyboardMarkup.create(
-                        listOf(
-                            InlineKeyboardButton.CallbackData(
-                                text = "Отметить приход",
-                                callbackData = "check-in"
-                            ),
-                            InlineKeyboardButton.CallbackData(
-                                text = "Отметить уход",
-                                callbackData = "check-out"
-                            )
-                        ),
-                        listOf(
-                            InlineKeyboardButton.CallbackData(
-                                text = "Посмотреть статистику",
-                                callbackData = "employee-stats"
-                            ),
-                        )
-                    )
+                    replyMarkup = employeeStartKeyboardMarkup()
                 )
             }
         }
+
+        fun employeeStartKeyboardMarkup() = InlineKeyboardMarkup.create(
+            listOf(
+                InlineKeyboardButton.CallbackData(
+                    text = "Отметить приход",
+                    callbackData = "check-in"
+                ),
+                InlineKeyboardButton.CallbackData(
+                    text = "Отметить уход",
+                    callbackData = "check-out"
+                )
+            ),
+            listOf(
+                InlineKeyboardButton.CallbackData(
+                    text = "Посмотреть статистику",
+                    callbackData = "employee-stats"
+                ),
+            )
+        )
+
+        fun adminStartKeyboardMarkup() = InlineKeyboardMarkup.create(
+            listOf(
+                InlineKeyboardButton.CallbackData(
+                    text = "Сотрудники",
+                    callbackData = "employee_list"
+                ),
+                InlineKeyboardButton.CallbackData(
+                    text = "Расчёт зарплаты",
+                    callbackData = "salary"
+                )
+            )
+        )
 
     }
 }
