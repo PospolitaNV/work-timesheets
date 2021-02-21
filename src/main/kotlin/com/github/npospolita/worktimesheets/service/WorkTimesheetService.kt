@@ -22,6 +22,7 @@ class WorkTimesheetService(
         val notAccountedTimesheets =
             workTimesheetRepository.findAllByTakenIntoAccountFalseAndId_EmployeeId(employeeId)
 
+        log.info("Not taken into account:{}", notAccountedTimesheets)
         val stringBuilder = StringBuilder()
 
         ReportFormatterUtils.addWorkReportHeader(stringBuilder, employee!!)
