@@ -26,7 +26,7 @@ class SalaryHandlers {
                         listOf(
                             InlineKeyboardButton.CallbackData(
                                 text = "Посчитать зарплату",
-                                callbackData = "salary-calculation"
+                                callbackData = "/salary-calculation"
                             ),
                             InlineKeyboardButton.CallbackData(
                                 text = "Посмотреть статистику работников",

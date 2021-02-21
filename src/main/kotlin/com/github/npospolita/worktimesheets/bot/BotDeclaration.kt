@@ -57,7 +57,7 @@ class BotDeclaration {
                         ErrorHandlers.unknownUser()
                     )
                 }
-                callbackQuery("salary") {
+                command("salary") {
                     log.info("salary handler")
                     doBasedOnAuth(
                         securityService,
@@ -66,7 +66,7 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("salary-calculation") {
+                command("salary-calculation") {
                     doBasedOnAuth(
                         securityService,
                         SalaryHandlers.salaryCalculation(workReportService),

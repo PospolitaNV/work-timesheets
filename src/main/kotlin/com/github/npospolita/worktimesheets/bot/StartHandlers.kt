@@ -21,7 +21,7 @@ class StartHandlers {
                             ),
                             InlineKeyboardButton.CallbackData(
                                 text = "Расчёт зарплаты",
-                                callbackData = "salary"
+                                callbackData = "/salary"
                             )
                         )
                     )
