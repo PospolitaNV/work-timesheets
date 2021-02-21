@@ -1,9 +1,7 @@
 package com.github.npospolita.worktimesheets.bot
 
-import com.github.kotlintelegrambot.Bot
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
 import com.github.kotlintelegrambot.entities.InlineKeyboardMarkup
-import com.github.kotlintelegrambot.entities.Update
 import com.github.kotlintelegrambot.entities.keyboard.InlineKeyboardButton
 
 class StartHandlers {
@@ -12,7 +10,7 @@ class StartHandlers {
         fun admin(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id!!, "Выберите операцию",
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(
@@ -32,7 +30,7 @@ class StartHandlers {
         fun employee(): HandleUpdate {
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id!!, "Выберите операцию",
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(

@@ -13,15 +13,17 @@ class SalaryHandlers {
         fun salaryCalculation(workReportService: WorkReportService): HandleUpdate {
             return { bot, update ->
                 workReportService.makeAllReports()
-                bot.sendMessage(update.message?.chat?.id!!, workReportService.makeAllReports())
+                bot.sendMessage(
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    workReportService.makeAllReports()
+                )
             }
         }
 
         fun salaryOptions(): HandleUpdate {
-            log.info("salary options()")
             return { bot, update ->
                 bot.sendMessage(
-                    update.message?.chat?.id!!, "Выберите операцию",
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!, "Выберите операцию",
                     replyMarkup = InlineKeyboardMarkup.create(
                         listOf(
                             InlineKeyboardButton.CallbackData(

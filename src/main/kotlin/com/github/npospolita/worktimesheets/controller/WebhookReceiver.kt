@@ -20,6 +20,5 @@ class WebHookReceiver(
     fun receiveWebHook(@RequestBody request: String?) {
         log.info("Received update: {}", request)
         bot.processUpdate(request!!)
-        log.info("Update parsed: {}", request)
     }
 }

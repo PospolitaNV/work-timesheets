@@ -6,13 +6,19 @@ class ErrorHandlers {
     companion object {
         fun unknownUser(): HandleUpdate {
             return { bot, update ->
-                bot.sendMessage(update.message?.chat?.id!!, "Вы не зарегистрированы в системе ):")
+                bot.sendMessage(
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    "Вы не зарегистрированы в системе ):"
+                )
             }
         }
 
         fun accessDenied(): HandleUpdate {
             return { bot, update ->
-                bot.sendMessage(update.message?.chat?.id!!, "У вас нет сюда доступа :P")
+                bot.sendMessage(
+                    update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!,
+                    "У вас нет сюда доступа :P"
+                )
             }
         }
     }

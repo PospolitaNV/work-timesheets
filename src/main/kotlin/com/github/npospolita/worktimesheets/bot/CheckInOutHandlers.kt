@@ -1,6 +1,8 @@
 package com.github.npospolita.worktimesheets.bot
 
+import com.github.kotlintelegrambot.Bot
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
+import com.github.kotlintelegrambot.entities.Update
 import com.github.npospolita.worktimesheets.domain.CheckInType
 import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import com.github.npospolita.worktimesheets.service.CheckInService
@@ -11,7 +13,10 @@ class CheckInOutHandlers {
             return { bot, update ->
                 var message = "Вы успешно отметили свой приход"
                 try {
-                    checkInService.checkIn(CheckInType.IN, update.message?.chat?.id!!)
+                    checkInService.checkIn(
+                        CheckInType.IN,
+                        update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!
+                    )
                 } catch (e: ValidationError) {
                     message = e.message!!
                 }
@@ -23,7 +28,10 @@ class CheckInOutHandlers {
             return { bot, update ->
                 var message = "Вы успешно отметили свой уход"
                 try {
-                    checkInService.checkIn(CheckInType.OUT, update.message?.chat?.id!!)
+                    checkInService.checkIn(
+                        CheckInType.OUT,
+                        update.message?.chat?.id ?: update.callbackQuery?.message?.chat?.id!!
+                    )
                 } catch (e: ValidationError) {
                     message = e.message!!
                 }
