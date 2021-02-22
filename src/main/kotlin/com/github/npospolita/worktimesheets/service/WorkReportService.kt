@@ -31,12 +31,12 @@ class WorkReportService(
     @Transactional
     fun makeReport(employeeId: Long): String? {
         val employee = employeeRepository.findByIdOrNull(employeeId)
-        log.info("Starting to calculate employee's salary:{}", employee)
+        log.info("Starting to calculate employee's salary:$employee")
 
         val notAccountedTimesheets = workTimesheetRepository.findAllByTakenIntoAccountFalseAndId_EmployeeId(employeeId)
 
         if (notAccountedTimesheets.isEmpty()) {
-            log.info("Employee's {} timesheets are empty.", employee)
+            log.info("Employee's $employee timesheets are empty.")
             return null
         }
 
@@ -47,7 +47,11 @@ class WorkReportService(
         ReportFormatterUtils.addWorkReportHeader(textSummary, employee!!)
 
         for (day in notAccountedTimesheets) {
-            if (day.endTime == null || day.startTime == null) throw ValidationError("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+            if (day.endTime == null || day.startTime == null) {
+                log.info("Employee's $employee have invalid timesheets for day: $day")
+                textSummary.append("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+                return textSummary.toString()
+            }
 
             val timeDiff = ChronoUnit.MINUTES.between(day.startTime, day.endTime)
             ReportFormatterUtils.addWorkReportDayTimesheet(textSummary, day, timeDiff)
