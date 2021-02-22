@@ -100,9 +100,10 @@ class WorkReportServiceTest(
         )
         saveTimesheet(10, 0, 20, 20, 5, false, 1L)
 
-        assertThrows<ValidationError> {
-            workReportService.makeReport(1L)
-        }
+        assertTrue(
+            workReportService.makeReport(1L)!!
+                .contains("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+        )
     }
 
     @Test
@@ -122,9 +123,12 @@ class WorkReportServiceTest(
         )
         saveTimesheet(10, 0, 20, 20, 5, false, 1L)
 
-        assertThrows<ValidationError> {
-            workReportService.makeReport(1L)
-        }
+
+        assertTrue(
+            workReportService.makeReport(1L)!!
+                .contains("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+        )
+
     }
 
     @Test
