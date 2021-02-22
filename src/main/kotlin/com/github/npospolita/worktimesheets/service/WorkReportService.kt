@@ -29,15 +29,15 @@ class WorkReportService(
     }
 
     @Transactional
-    fun makeReport(employeeId: Long): String {
+    fun makeReport(employeeId: Long): String? {
         val employee = employeeRepository.findByIdOrNull(employeeId)
-        log.info("Starting to calculate employee's salary:{}", employee)
+        log.info("Starting to calculate employee's salary:$employee")
 
         val notAccountedTimesheets = workTimesheetRepository.findAllByTakenIntoAccountFalseAndId_EmployeeId(employeeId)
 
         if (notAccountedTimesheets.isEmpty()) {
-            log.info("Employee's {} timesheets are empty.", employee)
-            return "У этого сотрудника ещё нет неоплаченных записей о работе"
+            log.info("Employee's $employee timesheets are empty.")
+            return null
         }
 
         val workingDays = ArrayList<LocalDate>()
@@ -47,7 +47,11 @@ class WorkReportService(
         ReportFormatterUtils.addWorkReportHeader(textSummary, employee!!)
 
         for (day in notAccountedTimesheets) {
-            if (day.endTime == null || day.startTime == null) throw ValidationError("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+            if (day.endTime == null || day.startTime == null) {
+                log.info("Employee's $employee have invalid timesheets for day: $day")
+                textSummary.append("Какая-то из дат сотрудника не имеет времени окончания или начала.")
+                return textSummary.toString()
+            }
 
             val timeDiff = ChronoUnit.MINUTES.between(day.startTime, day.endTime)
             ReportFormatterUtils.addWorkReportDayTimesheet(textSummary, day, timeDiff)
@@ -72,14 +76,17 @@ class WorkReportService(
         return textSummary.toString()
     }
 
-    fun makeAllReports() {
+    fun makeAllReports(): String {
+        val stringBuilder = StringBuilder()
         for (employee in employeeRepository.findAll()) {
-            this.makeReport(employee.id)
+            val report = this.makeReport(employee.id)
+            if (report != null) stringBuilder.append(report).append("\n\n")
         }
+        return stringBuilder.toString()
     }
 
 
-    fun makeReport(employeeFullName: String): String {
+    fun makeReport(employeeFullName: String): String? {
         val firstAndLastName = employeeFullName.split(" ")
         if (firstAndLastName.size != 2) throw ValidationError("Введите правильные Фамилию и Имя пользователя")
         val employee = employeeRepository.findByFirstNameAndLastName(firstAndLastName[0], firstAndLastName[1])

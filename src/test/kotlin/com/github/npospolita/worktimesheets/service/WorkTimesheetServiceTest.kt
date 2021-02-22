@@ -5,7 +5,6 @@ import com.github.npospolita.worktimesheets.dao.WorkTimesheetRepository
 import com.github.npospolita.worktimesheets.domain.Employee
 import com.github.npospolita.worktimesheets.domain.WorkTimesheet
 import com.github.npospolita.worktimesheets.domain.WorkTimesheetId
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -33,7 +32,7 @@ class WorkTimesheetServiceTest(
         saveTimesheet(10, 0,20, 20, 4, false)
         saveTimesheet(10, 0,20, 20, 5, false)
 
-        workTimesheetService.checkTimesheets(1L)
+        workTimesheetService.checkTimesheet(1L)
     }
 
     protected fun saveTimesheet(

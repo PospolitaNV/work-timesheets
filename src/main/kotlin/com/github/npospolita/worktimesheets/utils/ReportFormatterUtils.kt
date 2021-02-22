@@ -9,16 +9,16 @@ import java.time.format.DateTimeFormatter
 object ReportFormatterUtils {
 
     fun addWorkReportDayTimesheet(textSummary: StringBuilder, day: WorkTimesheet, timeDiff: Long?) {
-        textSummary.append("${formatDate(day.id.day)}: ${formatTime(day.startTime)} - ${formatTime(day.endTime)}")
+        textSummary.append("${formatDate(day.id.day)}: ${formatTime(day.startTime)} - ${formatTime(day.endTime) ?: "???"}")
         timeDiff?.let { textSummary.append(", ${timeDiff}мин.\n") }
     }
 
-    private fun formatDate(day: LocalDate): String {
-        return day.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+    private fun formatDate(day: LocalDate?): String? {
+        return day?.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
     }
 
-    private fun formatTime(time: LocalDateTime?): String {
-        return time!!.format(DateTimeFormatter.ofPattern("HH:mm"))
+    private fun formatTime(time: LocalDateTime?): String? {
+        return time?.format(DateTimeFormatter.ofPattern("HH:mm"))
     }
 
     fun addWorkReportHeader(textSummary: StringBuilder, employee: Employee) {

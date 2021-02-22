@@ -26,6 +26,13 @@ class EmployeeService(
         employeeRepository.deleteById(employeeId)
     }
 
-    public fun getEmployees() = employeeRepository.findAll()
+    fun getEmployees(): String {
+        val stringBuilder = StringBuilder()
+        for (employee in employeeRepository.findAll()) {
+            stringBuilder.append("Имя: ${employee.firstName} ${employee.lastName}\n")
+                .append("Зарплата: ${employee.wage}руб/час\n\n")
+        }
+        return stringBuilder.toString()
+    }
 
 }
