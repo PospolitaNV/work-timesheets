@@ -18,6 +18,7 @@ object CheckInOutHandlers {
                 message = e.message!!
             }
             bot.sendMessage(getChatId(update), message)
+            checkInService.notifyAdmin(CheckInType.IN, getUserId(update), bot)
         }
     }
 
@@ -33,6 +34,7 @@ object CheckInOutHandlers {
                 message = e.message!!
             }
             bot.sendMessage(getChatId(update), message)
+            checkInService.notifyAdmin(CheckInType.OUT, getUserId(update), bot)
         }
     }
 }

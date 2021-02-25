@@ -15,5 +15,4 @@ class SecurityService(
     fun isKnownUser(userId: Long) = employeeRepository.findById(userId).isPresent
 
     fun isAdmin(userId: Long) = adminId == userId
-
 }

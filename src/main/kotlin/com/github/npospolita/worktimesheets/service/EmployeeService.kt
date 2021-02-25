@@ -35,4 +35,8 @@ class EmployeeService(
         return stringBuilder.toString()
     }
 
+    fun getEmployee(userId: Long): Employee {
+        return employeeRepository.findById(userId).orElseThrow()
+    }
+
 }
