@@ -1,5 +1,6 @@
 package com.github.npospolita.worktimesheets.service
 
+import com.github.kotlintelegrambot.Bot
 import com.github.npospolita.worktimesheets.dao.WorkTimesheetRepository
 import com.github.npospolita.worktimesheets.domain.CheckInType
 import com.github.npospolita.worktimesheets.domain.WorkTimesheet
@@ -13,7 +14,9 @@ import java.time.ZoneId
 
 @Service
 class CheckInService(
-    private val workTimesheetRepository: WorkTimesheetRepository
+    private val workTimesheetRepository: WorkTimesheetRepository,
+    private val securityService: SecurityService,
+    private val employeeService: EmployeeService
 ) {
     companion object {
         val log = getLogger(CheckInService::class.java.name)
@@ -60,6 +63,16 @@ class CheckInService(
     }
 
     private fun getCurrentTime() = LocalDateTime.now(zoneId)
+
+    fun notifyAdmin(checkInType: CheckInType, userId: Long, bot: Bot) {
+        val employee = employeeService.getEmployee(userId)
+        val actionType = if (checkInType == CheckInType.IN) "пришла!" else "ушла!"
+        bot.sendMessage(
+            securityService.adminId, text = """
+            Работница "${employee.firstName} ${employee.lastName}" $actionType
+        """.trimIndent()
+        )
+    }
 
 
 }

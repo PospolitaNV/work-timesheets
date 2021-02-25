@@ -7,12 +7,10 @@ import com.github.npospolita.worktimesheets.domain.WorkTimesheetId
 import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.test.annotation.DirtiesContext
 import java.time.LocalDate
 import java.time.ZoneId
 import javax.transaction.Transactional
@@ -31,7 +29,7 @@ class CheckInServiceTest(
         val timesheetRecord =
             workTimesheetRepository.findByIdOrNull(WorkTimesheetId(LocalDate.now(ZoneId.of("Europe/Moscow")), 1))
         assertNotNull(timesheetRecord)
-        assertNotNull(timesheetRecord!!.startTime)
+        assertNotNull(timesheetRecord?.startTime)
     }
 
     @Test
