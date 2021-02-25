@@ -14,11 +14,11 @@ object CheckInOutHandlers {
                     CheckInType.IN,
                     getChatId(update)
                 )
+                checkInService.notifyAdmin(CheckInType.IN, getUserId(update), bot)
             } catch (e: ValidationError) {
                 message = e.message!!
             }
             bot.sendMessage(getChatId(update), message)
-            checkInService.notifyAdmin(CheckInType.IN, getUserId(update), bot)
         }
     }
 
@@ -30,11 +30,11 @@ object CheckInOutHandlers {
                     CheckInType.OUT,
                     getChatId(update)
                 )
+                checkInService.notifyAdmin(CheckInType.OUT, getUserId(update), bot)
             } catch (e: ValidationError) {
                 message = e.message!!
             }
             bot.sendMessage(getChatId(update), message)
-            checkInService.notifyAdmin(CheckInType.OUT, getUserId(update), bot)
         }
     }
 }
