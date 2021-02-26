@@ -6,10 +6,8 @@ import com.github.npospolita.worktimesheets.dao.WorkTimesheetRepository
 import com.github.npospolita.worktimesheets.domain.Employee
 import com.github.npospolita.worktimesheets.domain.WorkTimesheet
 import com.github.npospolita.worktimesheets.domain.WorkTimesheetId
-import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.math.BigInteger
@@ -169,7 +167,33 @@ class WorkReportServiceTest(
         assertFalse(result.contains("Kekes Maximus"))
     }
 
-    protected fun saveTimesheet(
+    @Test
+    fun makeReportWithTimeBetweenTwoDates() {
+        employeeService.addEmployee(Employee(1L, "Kekes", "Maximus", 100))
+
+        val day = LocalDate.of(2021, 1, 1)
+        workTimesheetRepository.save(
+            WorkTimesheet(
+                WorkTimesheetId(day, 1L),
+                startTime = LocalDateTime.of(day, LocalTime.of(10, 10)),
+                endTime = LocalDateTime.of(day.plusDays(1), LocalTime.of(2, 0)),
+                takenIntoAccount = false
+            )
+        )
+
+        workReportService.makeReport(1L)
+
+        val reports = workReportRepository.findAllByEmployeeId(1L)
+        assertEquals(1, reports.size)
+        assertEquals(BigInteger.valueOf(412L), reports[0].amount)
+        assertEquals(
+            listOf(
+                LocalDate.of(2021, 1, 1),
+            ), reports[0].days
+        )
+    }
+
+    fun saveTimesheet(
         startHour: Int,
         startMinute: Int,
         endHour: Int,
