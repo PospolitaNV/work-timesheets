@@ -8,26 +8,27 @@ import com.github.npospolita.worktimesheets.domain.WorkTimesheetId
 import com.github.npospolita.worktimesheets.domain.errors.ValidationError
 import org.slf4j.LoggerFactory.getLogger
 import org.springframework.stereotype.Service
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.ZoneId
 
 @Service
 class CheckInService(
     private val workTimesheetRepository: WorkTimesheetRepository,
     private val securityService: SecurityService,
-    private val employeeService: EmployeeService
+    private val employeeService: EmployeeService,
+    private val dateTimeProviderService: DateTimeProviderService
 ) {
     companion object {
         val log = getLogger(CheckInService::class.java.name)
     }
 
-    private val zoneId = ZoneId.of("Europe/Moscow")
-
     fun checkIn(checkInType: CheckInType, employeeId: Long) {
         log.info("Received check_in: {} for employee: {}", checkInType, employeeId)
 
-        val workTimesheet = workTimesheetRepository.findById(WorkTimesheetId(LocalDate.now(zoneId), employeeId))
+        val workTimesheet = workTimesheetRepository.findById(
+            WorkTimesheetId(
+                dateTimeProviderService.getWorktimesheetDate(),
+                employeeId
+            )
+        )
             .orElse(createEmptyTimesheet(employeeId))
 
         fillCheckInFields(checkInType, workTimesheet)
@@ -37,7 +38,7 @@ class CheckInService(
     }
 
     private fun createEmptyTimesheet(employeeId: Long) = WorkTimesheet(
-        WorkTimesheetId(LocalDate.now(zoneId), employeeId)
+        WorkTimesheetId(dateTimeProviderService.getWorktimesheetDate(), employeeId)
     )
 
     private fun fillCheckInFields(
@@ -47,22 +48,20 @@ class CheckInService(
         when (checkInType) {
             CheckInType.IN -> {
                 if (workTimesheet.startTime != null)
-                    throw ValidationError("Вы уже отмечали начало работы сегодня " + LocalDate.now(zoneId))
+                    throw ValidationError("Вы уже отмечали начало работы сегодня " + dateTimeProviderService.getWorktimesheetDate())
 
-                workTimesheet.startTime = getCurrentTime()
+                workTimesheet.startTime = dateTimeProviderService.getWorktimesheetTime()
             }
             CheckInType.OUT -> {
                 if (workTimesheet.startTime == null)
-                    throw ValidationError("Вы ещё не отмечали начало работы сегодня " + LocalDate.now(zoneId))
+                    throw ValidationError("Вы ещё не отмечали начало работы сегодня " + dateTimeProviderService.getWorktimesheetDate())
                 if (workTimesheet.endTime != null)
-                    throw ValidationError("Вы уже отмечали конец работы сегодня " + LocalDate.now(zoneId))
+                    throw ValidationError("Вы уже отмечали конец работы сегодня " + dateTimeProviderService.getWorktimesheetDate())
 
-                workTimesheet.endTime = getCurrentTime()
+                workTimesheet.endTime = dateTimeProviderService.getWorktimesheetTime()
             }
         }
     }
-
-    private fun getCurrentTime() = LocalDateTime.now(zoneId)
 
     fun notifyAdmin(checkInType: CheckInType, userId: Long, bot: Bot) {
         val employee = employeeService.getEmployee(userId)
