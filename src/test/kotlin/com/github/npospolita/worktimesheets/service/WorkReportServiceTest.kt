@@ -185,7 +185,7 @@ class WorkReportServiceTest(
 
         val reports = workReportRepository.findAllByEmployeeId(1L)
         assertEquals(1, reports.size)
-        assertEquals(BigInteger.valueOf(412L), reports[0].amount)
+        assertEquals(BigInteger.valueOf(1583L), reports[0].amount)
         assertEquals(
             listOf(
                 LocalDate.of(2021, 1, 1),
