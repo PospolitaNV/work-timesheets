@@ -18,7 +18,7 @@ object CheckInOutHandlers {
             } catch (e: ValidationError) {
                 message = e.message!!
             }
-            bot.sendMessage(getChatId(update), message)
+            bot.sendMessage(getChatId(update), message, replyMarkup = StartHandlers.employeeStartKeyboardMarkup())
         }
     }
 
@@ -34,7 +34,7 @@ object CheckInOutHandlers {
             } catch (e: ValidationError) {
                 message = e.message!!
             }
-            bot.sendMessage(getChatId(update), message)
+            bot.sendMessage(getChatId(update), message, replyMarkup = StartHandlers.employeeStartKeyboardMarkup())
         }
     }
 }
