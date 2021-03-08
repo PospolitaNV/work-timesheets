@@ -2,11 +2,8 @@ package com.github.npospolita.worktimesheets.utils
 
 import com.github.npospolita.worktimesheets.domain.WorkTimesheet
 import com.github.npospolita.worktimesheets.domain.WorkTimesheetId
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
-import java.lang.StringBuilder
 import java.time.LocalDate
 
 internal class ReportFormatterUtilsTest {
@@ -21,6 +18,6 @@ internal class ReportFormatterUtilsTest {
             ), null
         )
 
-        assertEquals("01-01-2020: 00:00 - ???", stringBuilder.toString())
+        assertEquals("01-01-2020: 00:00 - ???\n", stringBuilder.toString())
     }
 }

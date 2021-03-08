@@ -26,13 +26,14 @@ class WorkTimesheetServiceTest(
     fun checkTimesheets() {
         employeeService.addEmployee(Employee(1L, "Kekes", "Maximus", 100))
 
-        saveTimesheet(10, 0,20, 20, 1, false)
-        saveTimesheet(10, 0,20, 20, 2, false)
-        saveTimesheet(10, 0,20, 20, 3, false)
-        saveTimesheet(10, 0,20, 20, 4, false)
-        saveTimesheet(10, 0,20, 20, 5, false)
+        saveTimesheet(10, 0, 20, 20, 1, false)
+        saveTimesheet(10, 0, 20, 20, 2, false)
+        saveTimesheet(10, 0, 20, 20, 3, false)
+        saveTimesheet(10, 0, 20, 20, 4, false)
+        saveTimesheet(10, 0, 20, 20, 5, false)
 
-        workTimesheetService.checkTimesheet(1L)
+        val checkTimesheet = workTimesheetService.checkTimesheet(1L)
+        println(checkTimesheet)
     }
 
     protected fun saveTimesheet(
