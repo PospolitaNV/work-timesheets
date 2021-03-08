@@ -10,7 +10,11 @@ object ReportFormatterUtils {
 
     fun addWorkReportDayTimesheet(textSummary: StringBuilder, day: WorkTimesheet, timeDiff: Long?) {
         textSummary.append("${formatDate(day.id.day)}: ${formatTime(day.startTime)} - ${formatTime(day.endTime) ?: "???"}")
-        timeDiff?.let { textSummary.append(", ${timeDiff}мин.\n") }
+
+        if (timeDiff == null)
+            textSummary.append("\n")
+        else
+            textSummary.append(", ${timeDiff}мин.\n")
     }
 
     private fun formatDate(day: LocalDate?): String? {
