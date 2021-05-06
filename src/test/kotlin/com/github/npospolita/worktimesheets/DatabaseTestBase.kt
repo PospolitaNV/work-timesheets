@@ -21,10 +21,11 @@ class DatabaseTestBase {
         @JvmStatic
         @DynamicPropertySource
         fun infrastructureProperties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", postgres::getJdbcUrl)
-            registry.add("spring.datasource.password", postgres::getPassword)
-            registry.add("spring.datasource.username", postgres::getUsername)
+            registry.add("spring.datasource.url") {
+                "postgres://${postgres.username}:${postgres.password}@${postgres.host}:${postgres.firstMappedPort}/${postgres.databaseName}"
+            }
             registry.add("spring.jpa.hibernate.ddl-auto") { "create" }
+            registry.add("custom-datasource.ssl-enabled") { "false" }
         }
 
 
