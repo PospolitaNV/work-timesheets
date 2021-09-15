@@ -7,6 +7,7 @@ custom-datasource:
   url: ${HEROKU_POSTGRESQL_YELLOW_URL:postgres://n.pospolita:@localhost:5432/n.pospolita}
   ssl-enabled: true
 
+
 bot:
   hosted.url: ${HOSTED_URL:localhost}
   token: ${BOT_TOKEN:test}
