@@ -5,10 +5,10 @@ import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
-import com.github.kotlintelegrambot.dispatcher.contact
 import com.github.kotlintelegrambot.dispatcher.handlers.CallbackQueryHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.CommandHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
+import com.github.kotlintelegrambot.dispatcher.message
 import com.github.kotlintelegrambot.logging.LogLevel
 import com.github.kotlintelegrambot.webhook
 import com.github.npospolita.worktimesheets.service.*
@@ -107,10 +107,10 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                contact() {
-                    bot.sendMessage(
-                        this.message.chat.id, "User:\n" +
-                                "$this.contact.firstName + $this.contact.userId"
+                message() {
+                    message.forwardFrom ?: message.contact ?: bot.sendMessage(
+                        message.chat.id, "User:\n" +
+                                "$message.contact.firstName + $message.contact.userId"
                     )
                 }
             }
