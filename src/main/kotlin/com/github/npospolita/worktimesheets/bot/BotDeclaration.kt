@@ -111,7 +111,7 @@ class BotDeclaration {
                     if (message.contact != null) {
                         bot.sendMessage(
                             getChatId(update), "User:\n" +
-                                    "$message.contact.firstName + $message.contact.userId"
+                                    "${message.contact?.firstName} + ${message.contact?.userId}"
                         )
                     }
                 }
