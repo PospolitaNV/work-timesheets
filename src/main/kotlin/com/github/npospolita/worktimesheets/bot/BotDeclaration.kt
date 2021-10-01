@@ -5,6 +5,7 @@ import com.github.kotlintelegrambot.bot
 import com.github.kotlintelegrambot.dispatch
 import com.github.kotlintelegrambot.dispatcher.callbackQuery
 import com.github.kotlintelegrambot.dispatcher.command
+import com.github.kotlintelegrambot.dispatcher.contact
 import com.github.kotlintelegrambot.dispatcher.handlers.CallbackQueryHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.CommandHandlerEnvironment
 import com.github.kotlintelegrambot.dispatcher.handlers.HandleUpdate
@@ -104,6 +105,12 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied(),
                         CheckInOutHandlers.checkOut(checkinService),
                         ErrorHandlers.accessDenied()
+                    )
+                }
+                contact() {
+                    bot.sendMessage(
+                        this.message.chat.id, "User:\n" +
+                                "$this.contact.firstName + $this.contact.userId"
                     )
                 }
             }
