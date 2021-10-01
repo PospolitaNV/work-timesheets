@@ -108,10 +108,12 @@ class BotDeclaration {
                     )
                 }
                 message() {
-                    message.forwardFrom ?: message.contact ?: bot.sendMessage(
-                        message.chat.id, "User:\n" +
-                                "$message.contact.firstName + $message.contact.userId"
-                    )
+                    if (message.contact != null) {
+                        bot.sendMessage(
+                            getChatId(update), "User:\n" +
+                                    "$message.contact.firstName + $message.contact.userId"
+                        )
+                    }
                 }
             }
 
