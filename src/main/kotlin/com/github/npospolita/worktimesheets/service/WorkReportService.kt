@@ -54,7 +54,7 @@ class WorkReportService(
             }
 
             val timeDiff = ChronoUnit.MINUTES.between(day.startTime, day.endTime)
-            ReportFormatterUtils.addWorkReportDayTimesheet(textSummary, day, timeDiff)
+            ReportFormatterUtils.addWorkReportDayTimesheet(textSummary, day)
             timeSummary += timeDiff
             workingDays.add(day.id.day)
             day.takenIntoAccount = true

@@ -32,7 +32,7 @@ class WorkTimesheetService(
         ReportFormatterUtils.addWorkReportHeader(stringBuilder, employee!!)
 
         for (day in notAccountedTimesheets) {
-            ReportFormatterUtils.addWorkReportDayTimesheet(stringBuilder, day, null)
+            ReportFormatterUtils.addWorkReportDayTimesheet(stringBuilder, day)
         }
 
         log.info(stringBuilder.toString())
@@ -47,6 +47,14 @@ class WorkTimesheetService(
             if (!timesheet.isBlank()) stringBuilder.append(timesheet).append("\n\n");
         }
         return stringBuilder.toString()
+    }
+
+    fun monthlyReport(employeeId: Long): String {
+        val monthlyReports = workTimesheetRepository.monthlyReportByEmployeeId(employeeId)
+        val report = monthlyReports.fold("Имя - Месяц - Зарплата\n") { acc, monthlyReport ->
+            "$acc${monthlyReport.name} - ${monthlyReport.month} - ${monthlyReport.salary}\n"
+        }
+        return "$report\n!!ВАЖНО!! В отчете используется ваша текущая зарплата"
     }
 
 }

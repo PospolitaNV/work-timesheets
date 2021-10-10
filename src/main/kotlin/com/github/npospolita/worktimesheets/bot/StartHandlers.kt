@@ -37,9 +37,15 @@ object StartHandlers {
         ),
         listOf(
             InlineKeyboardButton.CallbackData(
-                text = "Посмотреть статистику",
-                callbackData = "employee_stats"
-            ),
+                text = "Посмотреть статистику за неделю",
+                callbackData = "employee_weekly_stats"
+            )
+        ),
+        listOf(
+            InlineKeyboardButton.CallbackData(
+                text = "Посмотреть статистику по месяцам",
+                callbackData = "employee_monthly_stats"
+            )
         )
     )
 

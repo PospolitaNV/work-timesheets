@@ -75,11 +75,19 @@ class BotDeclaration {
                         ErrorHandlers.accessDenied()
                     )
                 }
-                callbackQuery("employee_stats") {
+                callbackQuery("employee_weekly_stats") {
                     doBasedOnAuth(
                         securityService,
                         EmployeeHandlers.adminEmployeeStats(workTimesheetService),
-                        EmployeeHandlers.employeeStats(workTimesheetService),
+                        EmployeeHandlers.employeeWeeklyStats(workTimesheetService),
+                        ErrorHandlers.accessDenied()
+                    )
+                }
+                callbackQuery("employee_monthly_stats") {
+                    doBasedOnAuth(
+                        securityService,
+                        EmployeeHandlers.adminEmployeeStats(workTimesheetService),
+                        EmployeeHandlers.employeeMonthStats(workTimesheetService),
                         ErrorHandlers.accessDenied()
                     )
                 }

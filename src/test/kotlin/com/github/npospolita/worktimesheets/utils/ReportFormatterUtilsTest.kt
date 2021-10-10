@@ -15,7 +15,7 @@ internal class ReportFormatterUtilsTest {
             stringBuilder, WorkTimesheet(
                 WorkTimesheetId(LocalDate.of(2020, 1, 1), 1L),
                 startTime = LocalDate.of(2020, 1, 1).atTime(0, 0)
-            ), null
+            )
         )
 
         assertEquals("01-01-2020: 00:00 - ???\n", stringBuilder.toString())

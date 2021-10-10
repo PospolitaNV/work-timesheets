@@ -36,6 +36,20 @@ class WorkTimesheetServiceTest(
         println(checkTimesheet)
     }
 
+    @Test
+    fun checkMonthlyReport() {
+        employeeService.addEmployee(Employee(1L, "Kekes", "Maximus", 100))
+
+        saveTimesheet(10, 0, 20, 20, 1, false)
+        saveTimesheet(10, 0, 20, 20, 2, false)
+        saveTimesheet(10, 0, 20, 20, 3, false)
+        saveTimesheet(10, 0, 20, 20, 4, false)
+        saveTimesheet(10, 0, 20, 20, 5, false)
+
+        val checkTimesheet = workTimesheetService.monthlyReport(1L)
+        println(checkTimesheet)
+    }
+
     protected fun saveTimesheet(
         startHour: Int,
         startMinute: Int,

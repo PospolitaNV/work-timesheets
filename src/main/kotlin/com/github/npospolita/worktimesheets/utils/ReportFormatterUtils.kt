@@ -5,16 +5,22 @@ import com.github.npospolita.worktimesheets.domain.WorkTimesheet
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 object ReportFormatterUtils {
 
-    fun addWorkReportDayTimesheet(textSummary: StringBuilder, day: WorkTimesheet, timeDiff: Long?) {
+    fun addWorkReportDayTimesheet(textSummary: StringBuilder, day: WorkTimesheet) {
         textSummary.append("${formatDate(day.id.day)}: ${formatTime(day.startTime)} - ${formatTime(day.endTime) ?: "???"}")
 
-        if (timeDiff == null)
-            textSummary.append("\n")
-        else
-            textSummary.append(", ${timeDiff}мин.\n")
+        textSummary.append(calcHours(day))
+    }
+
+    private fun calcHours(day: WorkTimesheet): String {
+        if (day.endTime == null) return "\n"
+        val timediff = ChronoUnit.MINUTES.between(day.startTime, day.endTime)
+        val hours = timediff / 60
+        val minutes = timediff % 60
+        return ", ${hours}ч. ${minutes}мин.\n"
     }
 
     private fun formatDate(day: LocalDate?): String? {

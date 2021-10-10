@@ -30,7 +30,7 @@ object SalaryHandlers {
                         ),
                         InlineKeyboardButton.CallbackData(
                             text = "Посмотреть статистику работников",
-                            callbackData = "employee_stats"
+                            callbackData = "employee_weekly_stats"
                         )
                     )
                 )
