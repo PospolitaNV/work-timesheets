@@ -4,7 +4,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
 custom-datasource:
-  url: ${HEROKU_POSTGRESQL_YELLOW_URL:postgres://n.pospolita:@localhost:5432/n.pospolita}
+  url: ${HEROKU_POSTGRESQL_YELLOW_URL:postgres://nikitapospolita:@localhost:5432/nikitapospolita}
   ssl-enabled: true
 
 bot:
@@ -14,3 +14,7 @@ bot:
     adminId: ${ADMIN_ID:23452397}
 
 server.port: ${PORT:8080}
+
+admin:
+  login: ${ADMIN_LOGIN:test}
+  pass: ${ADMIN_PASS:test}

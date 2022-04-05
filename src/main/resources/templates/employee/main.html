@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <script type="text/javascript" th:src="@{/js/delete.js}"></script>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body>
+<div class="header" th:insert="~{header}"></div>
+<table class="table table-striped employees">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Зарплата</th>
+        <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <div th:each="employee : ${employees}" class="employees-row-holder">
+        <tr th:if="${employee.isEdited}" class="employees-row">
+            <form method="post" th:action="@{/employee/edit}" th:object="${employeeEditDto}">
+                <th scope="row" th:text="${employee.id}"></th>
+                <td><input th:errorclass="is-invalid" class="form-control input-sm" type="text"
+                           th:field="*{firstName}"/></td>
+                <td><input th:errorclass="is-invalid" class="form-control input-sm" type="text" th:field="*{lastName}"/>
+                </td>
+                <td><input th:errorclass="is-invalid" class="form-control input-sm" type="text" th:field="*{wage}"/>
+                </td>
+                <td class="actions">
+                    <button type="submit" class="btn btn-sm btn-success" value="Submit">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </button>
+                    <a type="button" class="btn btn-danger btn-sm" th:href="@{/employee}">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </a>
+                </td>
+                <input th:hidden="true" type="number" th:field="*{id}"/>
+            </form>
+        </tr>
+        <tr th:if="${not employee.isEdited}" class="employees-row">
+            <th scope="row" th:text="${employee.id}"></th>
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.wage + 'р./час'}"></td>
+            <td class="actions">
+                <a type="button" class="btn btn-sm btn-primary" th:href="@{/employee/edit(edit=${employee.id})}">
+                    <i class="bi bi-pencil-fill"></i>
+                </a>
+                <a type="button" class="btn btn-sm btn-danger" th:onclick="showAlert([[${employee}]])">
+                    <i class="bi bi-trash-fill"></i>
+                </a>
+            </td>
+        </tr>
+    </div>
+    </tbody>
+</table>
+<div class="footer">
+    <a th:href="@{/employee/add}">Добавить работника</a>
+</div>
+</body>
+</html>

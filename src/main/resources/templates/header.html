@@ -1,0 +1,5 @@
+<h1>Vinicook Admin Panel</h1>
+<div class="links-inline">
+    <a th:href="@{/employee}" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/employee') ? 'active-section-link' : 'void'}">Работники</a>
+    <a th:href="@{/timesheet}" th:classappend="${#strings.contains(#httpServletRequest.requestURI, '/timesheet') ? 'active-section-link' : 'void'}">Расписание</a>
+</div>

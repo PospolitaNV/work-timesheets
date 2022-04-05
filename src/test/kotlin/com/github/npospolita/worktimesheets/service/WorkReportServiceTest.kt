@@ -176,7 +176,7 @@ class WorkReportServiceTest(
             WorkTimesheet(
                 WorkTimesheetId(day, 1L),
                 startTime = LocalDateTime.of(day, LocalTime.of(10, 10)),
-                endTime = LocalDateTime.of(day.plusDays(1), LocalTime.of(2, 0)),
+                endTime = LocalDateTime.of(day.plusDays(1), LocalTime.of(5, 0)),
                 takenIntoAccount = false
             )
         )
@@ -185,7 +185,7 @@ class WorkReportServiceTest(
 
         val reports = workReportRepository.findAllByEmployeeId(1L)
         assertEquals(1, reports.size)
-        assertEquals(BigInteger.valueOf(1583L), reports[0].amount)
+        assertEquals(BigInteger.valueOf(1883L), reports[0].amount)
         assertEquals(
             listOf(
                 LocalDate.of(2021, 1, 1),

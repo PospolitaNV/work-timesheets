@@ -1,0 +1,53 @@
+/*---header.html---*/
+.header {
+    display: flex;
+    align-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.active-section-link {
+    padding: 2rem;
+    font-size: xxx-large;
+    color: black;
+    font-style: normal;
+}
+/*---employee/main.html---*/
+table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+tbody, thead, tr {
+    width: 70vw;
+}
+
+thead {
+    text-align: left;
+}
+
+th, td {
+    width: 15vw;
+}
+
+.footer {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+}
+/*---employee/create.html---*/
+.employees-add-form-holder {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.employee-add-button {
+    width: 100%;
+}
+
+.timesheets-holder {
+    display: flex;
+    justify-content: center;
+}
