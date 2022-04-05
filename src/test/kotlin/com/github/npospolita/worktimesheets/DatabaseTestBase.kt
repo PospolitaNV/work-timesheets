@@ -21,7 +21,7 @@ class DatabaseTestBase {
         @JvmStatic
         @DynamicPropertySource
         fun infrastructureProperties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url") {
+            registry.add("custom-datasource.url") {
                 "postgres://${postgres.username}:${postgres.password}@${postgres.host}:${postgres.firstMappedPort}/${postgres.databaseName}"
             }
             registry.add("spring.jpa.hibernate.ddl-auto") { "create" }

@@ -46,3 +46,8 @@ th, td {
 .employee-add-button {
     width: 100%;
 }
+
+.timesheets-holder {
+    display: flex;
+    justify-content: center;
+}

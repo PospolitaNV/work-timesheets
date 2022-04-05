@@ -12,7 +12,10 @@
 <body>
 <div class="header" th:insert="~{header}"></div>
 <div class="timesheets-holder">
-    <table class="table table-striped timesheets">
+    <div class="timesheets" th:if="${notFilledTimeDto.isEmpty()}">
+        Все работники молодцы 😇
+    </div>
+    <table class="table table-striped timesheets" th:if="${!notFilledTimeDto.isEmpty()}">
         <thead>
         <tr>
             <th scope="col">  День </th>
