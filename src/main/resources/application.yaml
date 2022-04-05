@@ -5,7 +5,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL94Dialect
 custom-datasource:
   url: ${HEROKU_POSTGRESQL_YELLOW_URL:postgres://nikitapospolita:@localhost:5432/nikitapospolita}
-  ssl-enabled: false
+  ssl-enabled: true
 
 bot:
   hosted.url: ${HOSTED_URL:localhost}
