@@ -24,7 +24,7 @@ tbody, thead, tr {
 }
 
 thead {
-    text-align: center;
+    text-align: left;
 }
 
 th, td {

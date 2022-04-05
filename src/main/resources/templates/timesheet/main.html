@@ -11,23 +11,40 @@
 </head>
 <body>
 <div class="header" th:insert="~{header}"></div>
-<div class="timesheets">
-    <table>
+<div class="timesheets-holder">
+    <table class="table table-striped timesheets">
         <thead>
         <tr>
-            <th> ID</th>
-            <th> Имя</th>
-            <th> Фамилия</th>
-            <th> Зарплата</th>
+            <th scope="col">  День </th>
+            <th scope="col">  Имя </th>
+            <th scope="col">  Фамилия </th>
+            <th scope="col">  Начало работы </th>
+            <th scope="col">  Конец работы </th>
+            <th scope="col">  Поправить </th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="employee : ${employees}">
-            <td><span th:text="${employee.id}"> ID </span></td>
-            <td><span th:text="${employee.firstName}"> Имя </span></td>
-            <td><span th:text="${employee.lastName}"> Фамилия </span></td>
-            <td><span th:text="${employee.wage}"> Зарплата </span></td>
-        </tr>
+        <div th:each="timesheetCorrectDto : ${notFilledTimeDto}" class="timesheets-row-holder">
+            <tr  class="employees-row">
+                <form method="post" th:action="@{/timesheet/correct}" th:object="${timesheetCorrectDto}">
+                    <th scope="row" type="text" th:id="workDay" th:name="workDay" th:text="${#temporals.format(timesheetCorrectDto.workDay, 'dd.MM')}"></th>
+                    <td><p type="text" th:id="firstName" th:name="firstName" th:text="${timesheetCorrectDto.firstName}"/></td>
+                    <td><p type="text" th:id="lastName" th:name="lastName" th:text="${timesheetCorrectDto.lastName}"/></td>
+                    <td><p type="time" th:id="startTime" th:name="startTime" th:text="${#temporals.format(timesheetCorrectDto.startTime.plusHours(3), 'HH:mm')}"/></td>
+                    <td><input type="time" th:id="endTime" th:name="endTime" /></td>
+                    <td class="actions">
+                        <button type="submit" class="btn btn-sm btn-success" value="Submit">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </button>
+                    </td>
+                    <input type="hidden" th:id="workDay" th:name="workDay" th:value="${timesheetCorrectDto.workDay}" />
+                    <input type="hidden" th:id="startTime" th:name="startTime" th:value="${#temporals.format(timesheetCorrectDto.startTime, 'yyyy-MM-dd HH:mm:ss')}" />
+                    <input type="hidden" th:id="employeeId" th:name="employeeId" th:value="${timesheetCorrectDto.employeeId}" />
+                    <input type="hidden" th:id="firstName" th:name="firstName" th:value="${timesheetCorrectDto.firstName}"/>
+                    <input type="hidden" th:id="lastName" th:name="lastName" th:value="${timesheetCorrectDto.lastName}"/>
+                </form>
+            </tr>
+        </div>
         </tbody>
     </table>
 </div>
