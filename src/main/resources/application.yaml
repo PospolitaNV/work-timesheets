@@ -9,7 +9,7 @@ custom-datasource:
 
 bot:
   hosted.url: ${HOSTED_URL:localhost}
-  token: ${BOT_TOKEN:test}
+  token: ${BOT_TOKEN:test_token}
   domain:
     adminId: ${ADMIN_ID:23452397}
 

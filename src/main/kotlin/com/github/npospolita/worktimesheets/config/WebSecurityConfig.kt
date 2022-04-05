@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 import org.springframework.security.core.userdetails.User
@@ -29,7 +30,6 @@ class WebSecurityConfig(
     override fun configure(http: HttpSecurity) {
         http
             .authorizeRequests()
-                .antMatchers("/$botToken").permitAll()
                 .antMatchers("/styles.css").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -40,6 +40,10 @@ class WebSecurityConfig(
                 .and()
             .logout()
                 .permitAll()
+    }
+
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers("/$botToken")
     }
 
     @Bean
