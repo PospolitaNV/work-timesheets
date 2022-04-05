@@ -37,6 +37,7 @@ class WebSecurityConfig(
             .loginProcessingUrl("/login")
                 .permitAll()
                 .successForwardUrl("/employee")
+                .defaultSuccessUrl("/employee", true)
                 .and()
             .logout()
                 .permitAll()
