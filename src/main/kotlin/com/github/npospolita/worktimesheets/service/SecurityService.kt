@@ -9,7 +9,7 @@ class SecurityService(
     val employeeRepository: EmployeeRepository
 ) {
 
-    @Value("\${bot.domain.adminId}")
+    @Value("#{'\${bot.domain.adminId}'.split(',')}")
     val adminIdList: List<Long> = listOf(0L)
 
     fun isKnownUser(userId: Long) = employeeRepository.findById(userId).isPresent
