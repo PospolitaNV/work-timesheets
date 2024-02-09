@@ -32,7 +32,7 @@ class DatabaseTestBase {
         @JvmStatic
         @DynamicPropertySource
         fun businessProperties(registry: DynamicPropertyRegistry) {
-            registry.add("bot.domain.adminId") { 5L }
+            registry.add("bot.domain.adminId") { listOf<Long>(5L) }
         }
     }
 

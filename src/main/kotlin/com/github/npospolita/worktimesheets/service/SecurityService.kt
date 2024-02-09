@@ -10,9 +10,9 @@ class SecurityService(
 ) {
 
     @Value("\${bot.domain.adminId}")
-    val adminId: Long = 0L
+    val adminIdList: List<Long> = listOf(0L)
 
     fun isKnownUser(userId: Long) = employeeRepository.findById(userId).isPresent
 
-    fun isAdmin(userId: Long) = adminId == userId
+    fun isAdmin(userId: Long) = userId in adminIdList
 }

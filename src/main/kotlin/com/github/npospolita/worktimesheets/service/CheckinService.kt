@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class CheckInService(
-    private val workTimesheetRepository: WorkTimesheetRepository,
-    private val securityService: SecurityService,
-    private val employeeService: EmployeeService,
-    private val dateTimeProviderService: DateTimeProviderService
+        private val workTimesheetRepository: WorkTimesheetRepository,
+        private val securityService: SecurityService,
+        private val employeeService: EmployeeService,
+        private val dateTimeProviderService: DateTimeProviderService
 ) {
     companion object {
         val log = getLogger(CheckInService::class.java.name)
@@ -24,12 +24,12 @@ class CheckInService(
         log.info("Received check_in: {} for employee: {}", checkInType, employeeId)
 
         val workTimesheet = workTimesheetRepository.findById(
-            WorkTimesheetId(
-                dateTimeProviderService.getWorktimesheetDate(),
-                employeeId
-            )
+                WorkTimesheetId(
+                        dateTimeProviderService.getWorktimesheetDate(),
+                        employeeId
+                )
         )
-            .orElse(createEmptyTimesheet(employeeId))
+                .orElse(createEmptyTimesheet(employeeId))
 
         fillCheckInFields(checkInType, workTimesheet)
 
@@ -38,12 +38,12 @@ class CheckInService(
     }
 
     private fun createEmptyTimesheet(employeeId: Long) = WorkTimesheet(
-        WorkTimesheetId(dateTimeProviderService.getWorktimesheetDate(), employeeId)
+            WorkTimesheetId(dateTimeProviderService.getWorktimesheetDate(), employeeId)
     )
 
     private fun fillCheckInFields(
-        checkInType: CheckInType,
-        workTimesheet: WorkTimesheet
+            checkInType: CheckInType,
+            workTimesheet: WorkTimesheet
     ) {
         when (checkInType) {
             CheckInType.IN -> {
@@ -52,6 +52,7 @@ class CheckInService(
 
                 workTimesheet.startTime = dateTimeProviderService.getWorktimesheetTime()
             }
+
             CheckInType.OUT -> {
                 if (workTimesheet.startTime == null)
                     throw ValidationError("Вы ещё не отмечали начало работы сегодня " + dateTimeProviderService.getWorktimesheetDate())
@@ -66,11 +67,13 @@ class CheckInService(
     fun notifyAdmin(checkInType: CheckInType, userId: Long, bot: Bot) {
         val employee = employeeService.getEmployee(userId)
         val actionType = if (checkInType == CheckInType.IN) "пришла!" else "ушла!"
-        bot.sendMessage(
-            securityService.adminId, text = """
+        for (adminId in securityService.adminIdList) {
+            bot.sendMessage(
+                    adminId, text = """
             Работница "${employee.firstName} ${employee.lastName}" $actionType
         """.trimIndent()
-        )
+            )
+        }
     }
 
 
