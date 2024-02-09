@@ -11,7 +11,7 @@ bot:
   hosted.url: ${HOSTED_URL:localhost}
   token: ${BOT_TOKEN:test_token}
   domain:
-    adminId: ${ADMIN_ID:23452397},${ADMIN_ID2:23452397}
+    adminId: ${ADMIN_IDS:1,2,3}
 
 server.port: ${PORT:8080}
 
